@@ -171,13 +171,7 @@ public class Oberflaeche extends JFrame {
 			steuerung.dialogAddApplicant();
 		}
 	});  	
-	panelButton2.add(buttonJob);
-	buttonJob.setPreferredSize(new Dimension(135, 135));
-	try {
-	 	Image job = ImageIO.read(getClass().getResource("resources/job.png"));
-	  	buttonJob.setIcon(new ImageIcon(job));
-	}   catch (IOException ex) {
-	} 
+	
 	panelButton2.add(buttonEdit);
 	buttonEdit.setPreferredSize(new Dimension(135, 135));
 	try {
@@ -223,11 +217,22 @@ public class Oberflaeche extends JFrame {
 	panelContent3.setBackground(Color.LIGHT_GRAY);
     panelInfo3.setBackground(Color.LIGHT_GRAY);
 	panelInfo3.setPreferredSize(new Dimension(0,20));
-	panelButton3.add(buttonRefreshJob);
-	buttonRefreshJob.setPreferredSize(new Dimension(135, 135));
-	buttonRefreshJob.addActionListener(new ActionListener() {
+	panelButton3.add(buttonJob);
+	buttonJob.setPreferredSize(new Dimension(135, 135));
+	buttonJob.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         }
+	});
+	
+	 try {
+		    Image job = ImageIO.read(getClass().getResource("resources/job_small.png"));
+		    itemJob.setIcon(new ImageIcon(job));
+		  } catch (IOException ex) {
+		  }
+	buttonJob.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent evt){
+			steuerung.dialogAddVacancy();
+		}
 	});
 	
 	//SWING: Panel4
@@ -280,11 +285,7 @@ public class Oberflaeche extends JFrame {
 		    itemAbout.setIcon(new ImageIcon(about));
 		  } catch (IOException ex) {
 		  }
-	  try {
-		    Image job = ImageIO.read(getClass().getResource("resources/job_small.png"));
-		    itemJob.setIcon(new ImageIcon(job));
-		  } catch (IOException ex) {
-		  }
+	 
 	itemExit.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();

@@ -20,9 +20,17 @@ public class Steuerung {
 	//Swing-Elemente
 	
 	public static JDialog		dialogNewApplicant = new JDialog(Oberflaeche.frame);
+	public static JDialog		dialogNewVacancy = new JDialog(Oberflaeche.frame);
+	
+	private Font 	fontHeadline = new Font("Arial", Font.BOLD, 18);
+	private Font	fontTextField = new Font("Arial", Font.BOLD, 14);	
 	  
 	private JPanel	panelDialog = new JPanel();
 	private JPanel	panelDialog2 = new JPanel();
+	private JPanel  panelDialog3 = new JPanel();
+	private JPanel  panelDialog4 = new JPanel();
+	
+	//Neuer Bewerber
 	private JLabel	labelName = new JLabel();
 	private JLabel	labelFirstName = new JLabel();
 	private JLabel	labelStreet = new JLabel();
@@ -33,10 +41,7 @@ public class Steuerung {
 	private JLabel	labelDate = new JLabel();
 	private JLabel	labelEducationalAchievement = new JLabel();	  
 	private JLabel	labelCity = new JLabel();
-	  
-	private Font 	fontHeadline = new Font("Arial", Font.BOLD, 18);
-	private Font	fontTextField = new Font("Arial", Font.BOLD, 14);	  
-	  
+	 
 	private JTextField	fieldVacancy = new JTextField();
 	private JTextField	fieldDate = new JTextField();
 	private JTextField	fieldName = new JTextField();
@@ -47,6 +52,18 @@ public class Steuerung {
 	private JTextField	fieldCity = new JTextField();
 	  
 	private JTabbedPane 	tabAdd = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+	
+	//Neue Stelle
+	private JLabel labelArea = new JLabel();
+	private JLabel labelPosition = new JLabel();
+	private JLabel labelLevel = new JLabel();
+	private JLabel	labelInstruction2 = new JLabel();
+	
+	private JTextField fieldArea = new JTextField();
+	private JTextField fieldPosition = new JTextField();
+	private JTextField fieldLevel = new JTextField();
+	
+	private JTabbedPane 	tabVacancy = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 	
 	//Datentypen
 	
@@ -199,6 +216,82 @@ public class Steuerung {
 	    tabAdd.addTab("Allgemein", panelDialog);
 	    tabAdd.addTab("Bewerbung", panelDialog2);
 	}
+	//METHODE: Neue Stelle anlegen
+	public void dialogAddVacancy(){
+		 //PanelDialog3 neue freie Stelle
+	    dialogNewVacancy.setVisible(true);
+	  	dialogNewVacancy.setSize(450,400);
+	  	dialogNewVacancy.setLocationRelativeTo(null);	
+	  	dialogNewVacancy.setResizable(false);
+	  	dialogNewVacancy.setTitle("Neuer Stelle");
+	  	panelDialog3.setBackground(Color.LIGHT_GRAY);
+	  	panelDialog3.setLayout(new BoxLayout(panelDialog3, BoxLayout.Y_AXIS));
+	  	panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
+	    panelDialog3.add(labelInstruction2); 
+	    labelInstruction2.setText("Bitte tragen Sie alle erfoderlichen Daten ein!");
+	    labelInstruction2.setFont(fontHeadline);
+	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
+	    panelDialog3.add(labelPosition);
+	    labelPosition.setText("Position:");
+	    panelDialog3.add(fieldPosition);
+	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldPosition.setFont(fontTextField);
+	    panelDialog3.add(labelArea); 
+	    labelArea.setText("Arbeitsbereich:");
+	    panelDialog3.add(fieldArea);
+	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldArea.setFont(fontTextField);
+	    /*
+	    panelDialog3.add(labelStreet);
+	    labelStreet.setText("Straße:");
+	    panelDialog3.add(fieldStreet);
+	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldStreet.setFont(fontTextField);
+	    panelDialog3.add(labelHouseNr);
+	    labelHouseNr.setText("Hausnummer:");
+	    panelDialog3.add(fieldHouseNr);
+	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldHouseNr.setFont(fontTextField);
+	    panelDialog3.add(labelPostalCode);
+	    labelPostalCode.setText("PLZ:");  
+	    panelDialog3.add(fieldPostalCode);
+	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldPostalCode.setFont(fontTextField);    
+	   */
+	    
+	  //PanelDialog4 neue freie Stelle
+	   	panelDialog4.setBackground(Color.LIGHT_GRAY);
+	  	panelDialog4.setLayout(new BoxLayout(panelDialog4, BoxLayout.Y_AXIS));
+	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
+	    panelDialog4.add(labelLevel);
+	    labelLevel.setText("Art des Bewerbers:");  
+	    panelDialog4.add(fieldLevel);
+	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldLevel.setFont(fontTextField);
+	    /*
+	    panelDialog4.add(labelDate); 
+	    labelDate.setText("Datum der Bewerbung:");
+	    panelDialog4.add(fieldDate);
+	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldDate.setFont(fontTextField);
+	    panelDialog4.add(labelCv);
+	    labelCv.setText("Lebenslauf angehängt:");
+	    panelDialog4.add(fieldCv);
+	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
+	    fieldCv.setFont(fontTextField);
+	    String[] boxListEducationalAchievement ={"Bitte auswählen","Haupptschulabschluss","Mittlere Reife","Abitur","Studium"}; 
+	    JComboBox	boxEducationalAchievement = new JComboBox(boxListEducationalAchievement);
+	    panelDialog4.add(labelEducationalAchievement);
+	    boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
+	    panelDialog4.add(boxEducationalAchievement);
+	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
+	    panelDialog4.add(Oberflaeche.save);
+		*/
+	    //TabbedPane Dialog
+	    dialogNewApplicant.add(tabAdd);
+	    tabVacancy.addTab("Allgemein", panelDialog3);
+	    tabVacancy.addTab("Spezifikation", panelDialog4);
 
+}
 }
 
