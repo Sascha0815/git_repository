@@ -152,7 +152,11 @@ public class Oberflaeche extends JFrame {
 	panelInfo2.setPreferredSize(new Dimension(0,20));
 	panelButton2.add(buttonRefreshApplicant);
 	buttonRefreshApplicant.setPreferredSize(new Dimension(135, 135));
-	panelButton2.add(buttonAdd);
+	try {
+	  	Image refreshApplicant = ImageIO.read(getClass().getResource("resources/refreshApplicant.png"));
+	  	buttonRefreshApplicant.setIcon(new ImageIcon(refreshApplicant));
+	} 	catch (IOException ex) {
+	}
 	buttonRefreshApplicant.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
            Vector results = datenbank.insertDataIntoTable();
@@ -160,6 +164,7 @@ public class Oberflaeche extends JFrame {
            modelPool.fireTableDataChanged();
         }
 	});
+	panelButton2.add(buttonAdd);
 	buttonAdd.setPreferredSize(new Dimension(135, 135));
 	try {
 	  	Image add = ImageIO.read(getClass().getResource("resources/add.png"));
@@ -329,7 +334,7 @@ public class Oberflaeche extends JFrame {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			
+			steuerung.closeDialogAddApplicant();
 			}	
 			
      });

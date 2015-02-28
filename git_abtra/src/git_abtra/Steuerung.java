@@ -3,6 +3,7 @@ package git_abtra;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -126,10 +127,10 @@ public class Steuerung {
 		if(street.equals("")){
 			return false;
 		}
-		if(!(houseNr>0)){
+		if((houseNr==0)){
 			return false;
 		}
-		if(!(postalCode>0)){
+		if((postalCode==0)){
 			return false;
 		}
 		if(!(city.equals(""))){
@@ -150,6 +151,7 @@ public class Steuerung {
 	  	dialogNewApplicant.setLocationRelativeTo(null);	
 	  	dialogNewApplicant.setResizable(false);
 	  	dialogNewApplicant.setTitle("Neuer Bewerber");
+	  	dialogNewApplicant.setDefaultCloseOperation(dialogNewApplicant.DO_NOTHING_ON_CLOSE);
 	  	panelDialog.setBackground(Color.LIGHT_GRAY);
 	  	panelDialog.setLayout(new BoxLayout(panelDialog, BoxLayout.Y_AXIS));
 	  	panelDialog.add(Box.createRigidArea(new Dimension(0,10)));
@@ -187,7 +189,6 @@ public class Steuerung {
 	    panelDialog.add(fieldCity);
 	    panelDialog.add(Box.createRigidArea(new Dimension(0,10)));
 	    fieldCity.setFont(fontTextField);  
-
 	    //PanelDialog2 neuer Bewerber_Bewerbung
 	   	panelDialog2.setBackground(Color.LIGHT_GRAY);
 	  	panelDialog2.setLayout(new BoxLayout(panelDialog2, BoxLayout.Y_AXIS));
@@ -214,8 +215,32 @@ public class Steuerung {
 	    //TabbedPane Dialog
 	    dialogNewApplicant.add(tabAdd);
 	    tabAdd.addTab("Allgemein", panelDialog);
-	    tabAdd.addTab("Bewerbung", panelDialog2);
+	    tabAdd.addTab("Bewerbung", panelDialog2);	  
+	    
 	}
+	
+	
+	
+	
+	public void closeDialogAddApplicant(){
+		dialogNewApplicant.dispose();
+		fieldVacancy.setText("");
+		fieldDate.setText("");
+		fieldName.setText("");
+		fieldFirstName.setText("");
+		fieldStreet.setText("");
+		fieldHouseNr.setText("");
+		fieldPostalCode.setText("");
+		fieldCity.setText("");
+		name = "";
+		firstName = "";
+		street = "";
+		houseNr = 0;
+		postalCode = 0;
+		city = "";
+	}
+	
+	
 	//METHODE: Neue Stelle anlegen
 	public void dialogAddVacancy(){
 		 //PanelDialog3 neue freie Stelle

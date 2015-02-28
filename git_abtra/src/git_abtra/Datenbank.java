@@ -9,7 +9,7 @@ public class Datenbank {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
  
-		String insertTableSQL = "INSERT INTO bewerber"
+		String insertTableSQL = "INSERT INTO applicant"
 				+ "(name, firstName, street, houseNr, postalCode, city) VALUES"
 				+ "(?,?,?,?,?,?)";
  
@@ -24,7 +24,6 @@ public class Datenbank {
 			preparedStatement.setString(6, Oberflaeche.steuerung.city); 
 			preparedStatement.executeUpdate();
 			System.out.println("Die Daten wurden erfoglreich an die Datenbank übermittelt!");
-			Steuerung.dialogNewApplicant.dispose();
 		} 
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -38,7 +37,7 @@ public class Datenbank {
         try {
         Connection con = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql368354","sql368354","wM7%yR2!");
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("Select * from bewerber");
+		ResultSet rs = stmt.executeQuery("Select * from applicant");
  
         while (rs.next()) {
         	Vector applicant = new Vector();
