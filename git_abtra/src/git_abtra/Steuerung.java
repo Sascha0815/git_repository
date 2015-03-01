@@ -17,7 +17,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import com.sun.glass.events.WindowEvent;
+// import com.sun.glass.events.WindowEvent;
 
 public class Steuerung {
 		
