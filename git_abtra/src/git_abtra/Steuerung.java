@@ -3,6 +3,7 @@ package git_abtra;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -15,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import com.sun.glass.events.WindowEvent;
 
 public class Steuerung {
 		
@@ -151,7 +154,7 @@ public class Steuerung {
 	  	dialogNewApplicant.setLocationRelativeTo(null);	
 	  	dialogNewApplicant.setResizable(false);
 	  	dialogNewApplicant.setTitle("Neuer Bewerber");
-	  	dialogNewApplicant.setDefaultCloseOperation(dialogNewApplicant.DO_NOTHING_ON_CLOSE);
+	  	dialogNewApplicant.add(panelDialog);
 	  	panelDialog.setBackground(Color.LIGHT_GRAY);
 	  	panelDialog.setLayout(new BoxLayout(panelDialog, BoxLayout.Y_AXIS));
 	  	panelDialog.add(Box.createRigidArea(new Dimension(0,10)));
@@ -188,9 +191,10 @@ public class Steuerung {
 	    labelCity.setText("Wohnort:");  
 	    panelDialog.add(fieldCity);
 	    panelDialog.add(Box.createRigidArea(new Dimension(0,10)));
-	    fieldCity.setFont(fontTextField);  
+	    fieldCity.setFont(fontTextField); 
+	    panelDialog.add(Oberflaeche.save);
 	    //PanelDialog2 neuer Bewerber_Bewerbung
-	   	panelDialog2.setBackground(Color.LIGHT_GRAY);
+	   /*	panelDialog2.setBackground(Color.LIGHT_GRAY);
 	  	panelDialog2.setLayout(new BoxLayout(panelDialog2, BoxLayout.Y_AXIS));
 	    panelDialog2.add(Box.createRigidArea(new Dimension(0,10)));
 	    panelDialog2.add(labelVacancy);
@@ -210,20 +214,42 @@ public class Steuerung {
 	    boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
 	    panelDialog2.add(boxEducationalAchievement);
 	    panelDialog2.add(Box.createRigidArea(new Dimension(0,10)));
-	    panelDialog2.add(Oberflaeche.save);
+	   
 
 	    //TabbedPane Dialog
 	    dialogNewApplicant.add(tabAdd);
 	    tabAdd.addTab("Allgemein", panelDialog);
 	    tabAdd.addTab("Bewerbung", panelDialog2);	  
-	    
+	    */
 	}
 	
 	
 	
+
+
+	public void closeDialogAddApplicant(){		
 	
-	public void closeDialogAddApplicant(){
-		dialogNewApplicant.dispose();
+		 
+		
+		panelDialog.remove(labelName);
+		panelDialog.remove(labelFirstName);
+		panelDialog.remove(labelStreet);
+		panelDialog.remove(labelHouseNr);
+		panelDialog.remove(labelPostalCode);
+		panelDialog.remove(labelInstruction);
+		panelDialog.remove(labelPostalCode);
+		panelDialog.remove(labelCity);
+		panelDialog.remove(Oberflaeche.save);
+		
+		
+		panelDialog.remove(fieldArea);
+		panelDialog.remove(fieldDate);
+		panelDialog.remove(fieldName);
+		panelDialog.remove(fieldFirstName);
+		panelDialog.remove(fieldStreet);
+		panelDialog.remove(fieldHouseNr);
+		panelDialog.remove(fieldPostalCode);
+		panelDialog.remove(fieldCity);
 		fieldVacancy.setText("");
 		fieldDate.setText("");
 		fieldName.setText("");
@@ -238,6 +264,10 @@ public class Steuerung {
 		houseNr = 0;
 		postalCode = 0;
 		city = "";
+		dialogNewApplicant.dispose();
+		
+		
+		
 	}
 	
 	
@@ -318,5 +348,6 @@ public class Steuerung {
 	    tabVacancy.addTab("Spezifikation", panelDialog4);
 
 }
+	
 }
 
