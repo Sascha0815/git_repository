@@ -3,7 +3,9 @@ package git_abtra;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.WindowAdapter;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -81,9 +83,9 @@ public class Steuerung {
 	public static void main(String[]args){
 		//Design des Programms
 		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
+		    for (LookAndFeelInfo LaF : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(LaF.getName())) {
+		            UIManager.setLookAndFeel(LaF.getClassName());
 		            break;
 		        }
 		    }
@@ -149,7 +151,49 @@ public class Steuerung {
 	public void dialogAddApplicant(){
 		
 		//PanelDialog neuer Bewerber_Allgemein
-	    dialogNewApplicant.setVisible(true);
+		dialogNewApplicant.setDefaultCloseOperation(dialogNewApplicant.DO_NOTHING_ON_CLOSE);
+		dialogNewApplicant.addWindowListener(new WindowListener(){
+			public void windowClosing(WindowEvent arg0) {
+				Oberflaeche.steuerung.closeDialogAddApplicant();
+			}
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		dialogNewApplicant.setVisible(true);
 	  	dialogNewApplicant.setSize(450,400);
 	  	dialogNewApplicant.setLocationRelativeTo(null);	
 	  	dialogNewApplicant.setResizable(false);
@@ -192,9 +236,8 @@ public class Steuerung {
 	    panelDialog.add(fieldCity);
 	    panelDialog.add(Box.createRigidArea(new Dimension(0,10)));
 	    fieldCity.setFont(fontTextField); 
-	    panelDialog.add(Oberflaeche.save);
 	    //PanelDialog2 neuer Bewerber_Bewerbung
-	   /*	panelDialog2.setBackground(Color.LIGHT_GRAY);
+	    panelDialog2.setBackground(Color.LIGHT_GRAY);
 	  	panelDialog2.setLayout(new BoxLayout(panelDialog2, BoxLayout.Y_AXIS));
 	    panelDialog2.add(Box.createRigidArea(new Dimension(0,10)));
 	    panelDialog2.add(labelVacancy);
@@ -214,13 +257,14 @@ public class Steuerung {
 	    boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
 	    panelDialog2.add(boxEducationalAchievement);
 	    panelDialog2.add(Box.createRigidArea(new Dimension(0,10)));
+	    panelDialog2.add(Oberflaeche.save);
 	   
 
 	    //TabbedPane Dialog
 	    dialogNewApplicant.add(tabAdd);
 	    tabAdd.addTab("Allgemein", panelDialog);
 	    tabAdd.addTab("Bewerbung", panelDialog2);	  
-	    */
+	    
 	}
 	
 	
@@ -239,9 +283,6 @@ public class Steuerung {
 		panelDialog.remove(labelInstruction);
 		panelDialog.remove(labelPostalCode);
 		panelDialog.remove(labelCity);
-		panelDialog.remove(Oberflaeche.save);
-		
-		
 		panelDialog.remove(fieldArea);
 		panelDialog.remove(fieldDate);
 		panelDialog.remove(fieldName);
@@ -264,7 +305,19 @@ public class Steuerung {
 		houseNr = 0;
 		postalCode = 0;
 		city = "";
+		
+		
+		panelDialog2.remove(fieldVacancy);
+		panelDialog2.remove(fieldLevel);
+		panelDialog2.remove(labelEducationalAchievement);
+		panelDialog2.remove(labelLevel);
+		panelDialog2.remove(Oberflaeche.save);
+		fieldVacancy.setText("");
+		fieldLevel.setText("");
+		dialogNewApplicant.remove(tabAdd);
 		dialogNewApplicant.dispose();
+		
+		
 		
 		
 		
@@ -343,7 +396,7 @@ public class Steuerung {
 	    panelDialog4.add(Oberflaeche.save);
 		*/
 	    //TabbedPane Dialog
-	    dialogNewApplicant.add(tabAdd);
+	    dialogNewVacancy.add(tabVacancy);
 	    tabVacancy.addTab("Allgemein", panelDialog3);
 	    tabVacancy.addTab("Spezifikation", panelDialog4);
 

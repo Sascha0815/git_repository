@@ -14,7 +14,7 @@ public class Datenbank {
 				+ "(?,?,?,?,?,?)";
  
 		try {
-			dbConnection = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql368354","sql368354","wM7%yR2!");
+			dbConnection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306","aptra","aptra1");
 			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
 			preparedStatement.setString(1, Oberflaeche.steuerung.name);
 			preparedStatement.setString(2, Oberflaeche.steuerung.firstName);
