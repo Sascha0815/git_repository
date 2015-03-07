@@ -82,27 +82,13 @@ public class Steuerung {
 	  
 	public static void main(String[]args){
 		//Design des Programms
-		try {
-		    for (LookAndFeelInfo LaF : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(LaF.getName())) {
-		            UIManager.setLookAndFeel(LaF.getClassName());
-		            break;
-		        }
-		    }
-		} catch (Exception e) {	
+		try
+		{
+		  UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
-	    
-		try {
-	        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	    } catch (ClassNotFoundException e) {
-	        e.printStackTrace();
-	    } catch (InstantiationException e) {
-	        e.printStackTrace();
-	    } catch (IllegalAccessException e) {
-	        e.printStackTrace();
-	    } catch (UnsupportedLookAndFeelException e) {
-	        e.printStackTrace();
-	    }
+		catch(Exception e){
+			
+		}
 		
 		new Oberflaeche("Bewerberverwaltung"); 
 
@@ -269,9 +255,7 @@ public class Steuerung {
 
 	//METODE: Bewerber Dialog löschen
 	public void closeDialogAddApplicant(){		
-	
-		 
-		
+
 		panelDialog.remove(labelName);
 		panelDialog.remove(labelFirstName);
 		panelDialog.remove(labelStreet);
@@ -302,8 +286,7 @@ public class Steuerung {
 		houseNr = 0;
 		postalCode = 0;
 		city = "";
-		
-		
+	
 		panelDialog2.remove(fieldVacancy);
 		panelDialog2.remove(fieldLevel);
 		panelDialog2.remove(labelEducationalAchievement);
@@ -313,16 +296,11 @@ public class Steuerung {
 		fieldLevel.setText("");
 		dialogNewApplicant.remove(tabAdd);
 		dialogNewApplicant.dispose();
-		
-		
-		
-		
-		
 	}
 	
 	//METHODE: Neue Stelle anlegen
 	public void dialogAddVacancy(){
-		 //PanelDialog3 neue freie Stelle
+		//PanelDialog3 neue freie Stelle
 	    dialogNewVacancy.setVisible(true);
 	  	dialogNewVacancy.setSize(450,400);
 	  	dialogNewVacancy.setLocationRelativeTo(null);	
@@ -345,25 +323,8 @@ public class Steuerung {
 	    panelDialog3.add(fieldArea);
 	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
 	    fieldArea.setFont(fontTextField);
-	    /*
-	    panelDialog3.add(labelStreet);
-	    labelStreet.setText("Straße:");
-	    panelDialog3.add(fieldStreet);
-	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
-	    fieldStreet.setFont(fontTextField);
-	    panelDialog3.add(labelHouseNr);
-	    labelHouseNr.setText("Hausnummer:");
-	    panelDialog3.add(fieldHouseNr);
-	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
-	    fieldHouseNr.setFont(fontTextField);
-	    panelDialog3.add(labelPostalCode);
-	    labelPostalCode.setText("PLZ:");  
-	    panelDialog3.add(fieldPostalCode);
-	    panelDialog3.add(Box.createRigidArea(new Dimension(0,10)));
-	    fieldPostalCode.setFont(fontTextField);    
-	   */
-	    
-	  //PanelDialog4 neue freie Stelle
+
+	    //PanelDialog4 neue freie Stelle
 	   	panelDialog4.setBackground(Color.LIGHT_GRAY);
 	  	panelDialog4.setLayout(new BoxLayout(panelDialog4, BoxLayout.Y_AXIS));
 	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
@@ -372,17 +333,11 @@ public class Steuerung {
 	    panelDialog4.add(fieldLevel);
 	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
 	    fieldLevel.setFont(fontTextField);
-	    /*
 	    panelDialog4.add(labelDate); 
 	    labelDate.setText("Datum der Bewerbung:");
 	    panelDialog4.add(fieldDate);
 	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
 	    fieldDate.setFont(fontTextField);
-	    panelDialog4.add(labelCv);
-	    labelCv.setText("Lebenslauf angehängt:");
-	    panelDialog4.add(fieldCv);
-	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
-	    fieldCv.setFont(fontTextField);
 	    String[] boxListEducationalAchievement ={"Bitte auswählen","Haupptschulabschluss","Mittlere Reife","Abitur","Studium"}; 
 	    JComboBox	boxEducationalAchievement = new JComboBox(boxListEducationalAchievement);
 	    panelDialog4.add(labelEducationalAchievement);
@@ -390,7 +345,7 @@ public class Steuerung {
 	    panelDialog4.add(boxEducationalAchievement);
 	    panelDialog4.add(Box.createRigidArea(new Dimension(0,10)));
 	    panelDialog4.add(Oberflaeche.save);
-		*/
+		
 	    //TabbedPane Dialog
 	    dialogNewVacancy.add(tabVacancy);
 	    tabVacancy.addTab("Allgemein", panelDialog3);
