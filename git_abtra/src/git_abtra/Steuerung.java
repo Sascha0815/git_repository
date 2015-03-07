@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -86,6 +87,9 @@ public class Steuerung {
 	public static int houseNr;
 	public static int postalCode;
 	public static String city;
+	
+	final public static Oberflaeche oberflaeche = new Oberflaeche();
+	final public static Datenbank datenbank = new Datenbank();
 
 	public static void main(String[] args) {
 		// Design des Programms
@@ -94,8 +98,10 @@ public class Steuerung {
 		} catch (Exception e) {
 
 		}
-
-		new Oberflaeche("Bewerberverwaltung");
+		Vector results = datenbank.insertDataIntoTable();
+		oberflaeche.modelPool.setDataVector(results, Oberflaeche.COLUMN_IDENTIFIERS_APPLICANT);
+		oberflaeche.modelPool.fireTableDataChanged();
+		new Oberflaeche("aptra");
 
 	}
 
