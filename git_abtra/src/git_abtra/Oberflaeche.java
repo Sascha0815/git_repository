@@ -153,6 +153,7 @@ public class Oberflaeche extends JFrame {
 		panelContent2.setBackground(Color.LIGHT_GRAY);
 		panelInfo2.setBackground(Color.LIGHT_GRAY);
 		panelInfo2.setPreferredSize(new Dimension(0, 20));
+		buttonRefreshApplicant.setToolTipText("Tabelle aktualisieren");
 		panelButton2.add(buttonRefreshApplicant);
 		buttonRefreshApplicant.setPreferredSize(new Dimension(135, 135));
 		try {
@@ -168,6 +169,7 @@ public class Oberflaeche extends JFrame {
 				modelPool.fireTableDataChanged();
 			}
 		});
+		buttonAdd.setToolTipText("Neuer Bewerber hinzufügen");
 		panelButton2.add(buttonAdd);
 		buttonAdd.setPreferredSize(new Dimension(135, 135));
 		try {
@@ -181,7 +183,7 @@ public class Oberflaeche extends JFrame {
 				steuerung.dialogAddApplicant();
 			}
 		});
-
+		buttonEdit.setToolTipText("Bewerber bearbeiten");
 		panelButton2.add(buttonEdit);
 		buttonEdit.setPreferredSize(new Dimension(135, 135));
 		try {
@@ -190,6 +192,7 @@ public class Oberflaeche extends JFrame {
 			buttonEdit.setIcon(new ImageIcon(pencil));
 		} catch (IOException ex) {
 		}
+		buttonDelete.setToolTipText("Bewerber löschen");
 		panelButton2.add(buttonDelete);
 		buttonDelete.setPreferredSize(new Dimension(135, 135));
 		try {
@@ -198,6 +201,7 @@ public class Oberflaeche extends JFrame {
 			buttonDelete.setIcon(new ImageIcon(trashcan));
 		} catch (IOException ex) {
 		}
+		buttonSettings.setToolTipText("Eisntellungen");
 		panelButton2.add(buttonSettings);
 		buttonSettings.setPreferredSize(new Dimension(135, 135));
 		try {
@@ -206,6 +210,7 @@ public class Oberflaeche extends JFrame {
 			buttonSettings.setIcon(new ImageIcon(settings));
 		} catch (IOException ex) {
 		}
+		buttonExit.setToolTipText("Programm schließen");
 		panelButton2.add(buttonExit);
 		buttonExit.setPreferredSize(new Dimension(135, 135));
 		try {
@@ -231,6 +236,7 @@ public class Oberflaeche extends JFrame {
 		panelContent3.setBackground(Color.LIGHT_GRAY);
 		panelInfo3.setBackground(Color.LIGHT_GRAY);
 		panelInfo3.setPreferredSize(new Dimension(0, 20));
+		buttonRefreshJob.setToolTipText("Tabelle aktualisieren");
 		panelButton3.add(buttonRefreshJob);
 		buttonRefreshJob.setPreferredSize(new Dimension(135, 135));
 		buttonRefreshJob.addActionListener(new ActionListener() {
@@ -244,10 +250,12 @@ public class Oberflaeche extends JFrame {
 			buttonRefreshJob.setIcon(new ImageIcon(add));
 		} catch (IOException ex) {
 		}
+		buttonJob.setToolTipText("Neue Arbeitstelle hinzufügen");
 		panelButton3.add(buttonJob);
 		buttonJob.setPreferredSize(new Dimension(135, 135));
 		buttonJob.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent evt) {
+				steuerung.dialogAddVacancy();
 			}
 		});
 		try {
@@ -256,11 +264,6 @@ public class Oberflaeche extends JFrame {
 			itemJob.setIcon(new ImageIcon(job));
 		} catch (IOException ex) {
 		}
-		buttonJob.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				steuerung.dialogAddVacancy();
-			}
-		});
 		try {
 			Image job = ImageIO.read(getClass()
 					.getResource("resources/job.png"));
