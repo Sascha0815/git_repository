@@ -26,8 +26,9 @@ public class Datenbank {
 			preparedStatement.setInt(5, Oberflaeche.steuerung.postalCode);
 			preparedStatement.setString(6, Oberflaeche.steuerung.city);
 			preparedStatement.setString(7, Oberflaeche.steuerung.vacancy);
-			preparedStatement.setDate(8, Oberflaeche.steuerung.date);
-			preparedStatement.setString(9, Oberflaeche.steuerung.educationalAchievement);
+			preparedStatement.setString(8, Oberflaeche.steuerung.date);
+			preparedStatement.setString(9,
+					Oberflaeche.steuerung.educationalAchievement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -53,6 +54,9 @@ public class Datenbank {
 				applicant.add(rs.getString(4));
 				applicant.add(rs.getString(5));
 				applicant.add(rs.getString(6));
+				applicant.add(rs.getString(7));
+				applicant.add(rs.getString(8));
+				applicant.add(rs.getString(9));
 				results.add(applicant);
 			}
 		} catch (SQLException e) {
