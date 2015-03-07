@@ -23,7 +23,6 @@ public class Datenbank {
 			preparedStatement.setInt(5, Oberflaeche.steuerung.postalCode);
 			preparedStatement.setString(6, Oberflaeche.steuerung.city); 
 			preparedStatement.executeUpdate();
-			System.out.println("Die Daten wurden erfoglreich an die Datenbank übermittelt!");
 		} 
 		catch (SQLException e) {
 			System.out.println(e.getMessage());

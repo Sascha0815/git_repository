@@ -266,11 +266,8 @@ public class Steuerung {
 	    tabAdd.addTab("Bewerbung", panelDialog2);	  
 	    
 	}
-	
-	
-	
 
-
+	//METODE: Bewerber Dialog löschen
 	public void closeDialogAddApplicant(){		
 	
 		 
@@ -322,7 +319,6 @@ public class Steuerung {
 		
 		
 	}
-	
 	
 	//METHODE: Neue Stelle anlegen
 	public void dialogAddVacancy(){
