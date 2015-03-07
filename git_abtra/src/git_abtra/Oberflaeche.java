@@ -326,7 +326,41 @@ public class Oberflaeche extends JFrame {
     
     //SWING: Table Bewerberpool
     modelPool.setColumnIdentifiers(COLUMN_IDENTIFIERS_APPLICANT);
+    tableApplicant.getTableHeader().setReorderingAllowed(false);
     tableApplicant = new JTable(modelPool);
+    tableApplicant.addMouseListener(new MouseListener(){
+		public void mouseClicked(MouseEvent e) {
+			tableApplicant = (JTable) e.getSource();
+			int column = tableApplicant.getSelectedColumn();
+			System.out.println(column);
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+  	});
+    
     JScrollPane	scrollPanePool = new JScrollPane(tableApplicant);
     panelContent2.add(scrollPanePool);
     scrollPanePool.setPreferredSize(new Dimension(panelContent2.getSize().width-20, panelContent2.getSize().height-20));
@@ -335,6 +369,7 @@ public class Oberflaeche extends JFrame {
     
     //SWING:Table Arbeitsstellen
     modelJob.setColumnIdentifiers(COLUMN_IDENTIFIERS_JOB);
+    tableJob.getTableHeader().setReorderingAllowed(false);
     tableJob = new JTable(modelJob);
     JScrollPane	scrollPaneJob = new JScrollPane(tableJob);
     panelContent3.add(scrollPaneJob);
