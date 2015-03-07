@@ -56,9 +56,10 @@ public class Steuerung {
 	private JTextField	fieldHouseNr = new JTextField();
 	private JTextField	fieldPostalCode = new JTextField();
 	private JTextField	fieldCity = new JTextField();
-	  
+	private String[] boxListEducationalAchievement = {"Bitte auswählen","Haupptschulabschluss","Mittlere Reife","Abitur","Studium"};
+	private JComboBox	boxEducationalAchievement = new JComboBox(boxListEducationalAchievement);  
 	private JTabbedPane 	tabAdd = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-	
+
 	//Neue Stelle
 	private JLabel labelArea = new JLabel();
 	private JLabel labelPosition = new JLabel();
@@ -236,9 +237,7 @@ public class Steuerung {
 	    panelDialog2.add(fieldDate);
 	    panelDialog2.add(Box.createRigidArea(new Dimension(0,10)));
 	    fieldDate.setFont(fontTextField);
-	    panelDialog2.add(Box.createRigidArea(new Dimension(0,10)));
-	    String[] boxListEducationalAchievement ={"Bitte auswählen","Haupptschulabschluss","Mittlere Reife","Abitur","Studium"}; 
-	    JComboBox	boxEducationalAchievement = new JComboBox(boxListEducationalAchievement);
+	    panelDialog2.add(Box.createRigidArea(new Dimension(0,10)));	    
 	    panelDialog2.add(labelEducationalAchievement);
 	    boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
 	    panelDialog2.add(boxEducationalAchievement);
@@ -249,23 +248,20 @@ public class Steuerung {
 	    //TabbedPane Dialog
 	    dialogNewApplicant.add(tabAdd);
 	    tabAdd.addTab("Allgemein", panelDialog);
-	    tabAdd.addTab("Bewerbung", panelDialog2);	  
-	    
+	    tabAdd.addTab("Bewerbung", panelDialog2);	 
+	   
 	}
 
 	//METODE: Bewerber Dialog löschen
-	public void closeDialogAddApplicant(){		
-
+	public void closeDialogAddApplicant(){				
 		panelDialog.remove(labelName);
 		panelDialog.remove(labelFirstName);
 		panelDialog.remove(labelStreet);
 		panelDialog.remove(labelHouseNr);
 		panelDialog.remove(labelPostalCode);
 		panelDialog.remove(labelInstruction);
-		panelDialog.remove(labelPostalCode);
 		panelDialog.remove(labelCity);
 		panelDialog.remove(fieldArea);
-		panelDialog.remove(fieldDate);
 		panelDialog.remove(fieldName);
 		panelDialog.remove(fieldFirstName);
 		panelDialog.remove(fieldStreet);
@@ -288,12 +284,14 @@ public class Steuerung {
 		city = "";
 	
 		panelDialog2.remove(fieldVacancy);
-		panelDialog2.remove(fieldLevel);
+		panelDialog2.remove(fieldDate);
 		panelDialog2.remove(labelEducationalAchievement);
-		panelDialog2.remove(labelLevel);
-		panelDialog2.remove(Oberflaeche.save);
-		fieldVacancy.setText("");
-		fieldLevel.setText("");
+		panelDialog2.remove(labelVacancy);
+		panelDialog2.remove(labelDate);
+		panelDialog2.remove(Oberflaeche.save);		
+		panelDialog2.remove(boxEducationalAchievement);
+		tabAdd.remove(panelDialog2);
+		tabAdd.remove(panelDialog);
 		dialogNewApplicant.remove(tabAdd);
 		dialogNewApplicant.dispose();
 	}
