@@ -255,23 +255,13 @@ public class Steuerung {
 		tabAdd.addTab("Bewerbung", panelDialog2);
 
 	}
+	
+	
 
 	// METODE: Bewerber Dialog löschen
 	public void closeDialogAddApplicant() {
-		panelDialog.remove(labelName);
-		panelDialog.remove(labelFirstName);
-		panelDialog.remove(labelStreet);
-		panelDialog.remove(labelHouseNr);
-		panelDialog.remove(labelPostalCode);
-		panelDialog.remove(labelInstruction);
-		panelDialog.remove(labelCity);
-		panelDialog.remove(fieldArea);
-		panelDialog.remove(fieldName);
-		panelDialog.remove(fieldFirstName);
-		panelDialog.remove(fieldStreet);
-		panelDialog.remove(fieldHouseNr);
-		panelDialog.remove(fieldPostalCode);
-		panelDialog.remove(fieldCity);
+		panelDialog.removeAll();
+		panelDialog2.removeAll();
 		fieldVacancy.setText("");
 		fieldDate.setText("");
 		fieldName.setText("");
@@ -285,16 +275,8 @@ public class Steuerung {
 		street = "";
 		houseNr = 0;
 		postalCode = 0;
-		city = "";
-
-		panelDialog2.remove(fieldVacancy);
-		panelDialog2.remove(fieldDate);
-		panelDialog2.remove(labelEducationalAchievement);
-		panelDialog2.remove(labelVacancy);
-		panelDialog2.remove(labelDate);
-		panelDialog2.remove(Oberflaeche.save);
-		panelDialog2.remove(boxEducationalAchievement);
-		dialogNewApplicant.remove(tabAdd);
+		city = "";		
+		tabAdd.removeAll();
 		dialogNewApplicant.dispose();
 	}
 
