@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -90,16 +89,14 @@ public class Steuerung {
 
 	public static void main(String[] args) {
 		// Design des Programms
-	    try
-	    {
-	      UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-	    }
-	    catch ( Exception e )
-	    {
-	      e.printStackTrace();
-	    }
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+
+		}
+
 		new Oberflaeche("Bewerberverwaltung");
-		
+
 	}
 
 	// METHODE: Standardkonstruktor
@@ -256,7 +253,7 @@ public class Steuerung {
 		dialogNewApplicant.add(tabAdd);
 		tabAdd.addTab("Allgemein", panelDialog);
 		tabAdd.addTab("Bewerbung", panelDialog2);
-		SwingUtilities.updateComponentTreeUI(dialogNewApplicant);
+
 	}
 	
 	
