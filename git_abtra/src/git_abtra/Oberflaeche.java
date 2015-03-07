@@ -201,7 +201,7 @@ public class Oberflaeche extends JFrame {
 			buttonDelete.setIcon(new ImageIcon(trashcan));
 		} catch (IOException ex) {
 		}
-		buttonSettings.setToolTipText("Eisntellungen");
+		buttonSettings.setToolTipText("Einstellungen");
 		panelButton2.add(buttonSettings);
 		buttonSettings.setPreferredSize(new Dimension(135, 135));
 		try {
