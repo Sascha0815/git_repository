@@ -58,7 +58,7 @@ public class Oberflaeche extends JFrame {
 	private JButton buttonRefreshApplicant = new JButton();
 	private JButton buttonRefreshJob = new JButton();
 
-	public DefaultTableModel modelPool = new DefaultTableModel(1, 4) {
+	private DefaultTableModel modelPool = new DefaultTableModel(1, 4) {
 		public boolean isCellEditable(int row, int column) {
 			return false;
 		}
@@ -448,8 +448,5 @@ public class Oberflaeche extends JFrame {
 			}
 
 		});
-	}
-	public Oberflaeche(){
-		
 	}
 }
