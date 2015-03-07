@@ -14,7 +14,7 @@ public class Datenbank {
 				+ "(?,?,?,?,?,?)";
  
 		try {
-			dbConnection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306","aptra","aptra1");
+			dbConnection = DriverManager.getConnection("jdbc:mysql://185.28.20.242:3306/u474396146_db","u474396146_aptra","aptraDB");
 			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
 			preparedStatement.setString(1, Oberflaeche.steuerung.name);
 			preparedStatement.setString(2, Oberflaeche.steuerung.firstName);
@@ -35,7 +35,7 @@ public class Datenbank {
 		 
         Vector results = new Vector();
         try {
-        Connection con = DriverManager.getConnection("jdbc:mysql://sql3.freemysqlhosting.net:3306/sql368354","sql368354","wM7%yR2!");
+        Connection con = DriverManager.getConnection("jdbc:mysql://185.28.20.242:3306/u474396146_db","u474396146_aptra","aptraDB");
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery("Select * from applicant");
  
