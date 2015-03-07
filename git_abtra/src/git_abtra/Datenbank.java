@@ -11,8 +11,8 @@ public class Datenbank {
 		PreparedStatement preparedStatement = null;
 
 		String insertTableSQL = "INSERT INTO applicant"
-				+ "(name, firstName, street, houseNr, postalCode, city) VALUES"
-				+ "(?,?,?,?,?,?)";
+				+ "(name, firstName, street, houseNr, postalCode, city, vacancy, date, educationalAchievement) VALUES"
+				+ "(?,?,?,?,?,?,?,?,?)";
 
 		try {
 			dbConnection = DriverManager.getConnection(
@@ -25,6 +25,9 @@ public class Datenbank {
 			preparedStatement.setInt(4, Oberflaeche.steuerung.houseNr);
 			preparedStatement.setInt(5, Oberflaeche.steuerung.postalCode);
 			preparedStatement.setString(6, Oberflaeche.steuerung.city);
+			preparedStatement.setString(7, Oberflaeche.steuerung.vacancy);
+			preparedStatement.setDate(8, Oberflaeche.steuerung.date);
+			preparedStatement.setString(9, Oberflaeche.steuerung.educationalAchievement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

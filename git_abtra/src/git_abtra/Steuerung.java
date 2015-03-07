@@ -6,6 +6,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -103,8 +107,13 @@ public class Steuerung {
 	public static int postalCode;
 	public static String city;
 	public static String vacancy;
-	public static char[] date;
+	public static int day;
+	public static int month;
+	public static int year;
+	public static int inputDate;
+	public static Date date;	
 	public static String educationalAchievement;
+	
 
 	public static void main(String[] args) {
 		// Design des Programms
@@ -133,9 +142,18 @@ public class Steuerung {
 		postalCode = Integer.parseInt(fieldPostalCode.getText());
 		city = fieldCity.getText();
 		vacancy = fieldVacancy.getText();
-		date = fieldDate.getText().toCharArray();
-		educationalAchievement = (String) boxEducationalAchievement
-				.getSelectedItem();
+		day = Integer.valueOf((String)boxDay.getSelectedItem());
+		month = Integer.valueOf((String)boxMonth.getSelectedItem());
+		year = Integer.valueOf((String)boxYear.getSelectedItem());
+		educationalAchievement = String.valueOf(boxEducationalAchievement.getSelectedItem());
+		inputDate = day + month + year;
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month-1);
+		calendar.set(Calendar.DATE, day);
+		date = (Date) calendar.getTime();
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		String strDate = df.format(date);
 
 		if (name.equals("")) {
 			return false;
@@ -156,9 +174,6 @@ public class Steuerung {
 			return false;
 		}
 		if (vacancy.equals("")) {
-			return false;
-		}
-		if (date.equals("")) {
 			return false;
 		}
 		if (educationalAchievement.equals("")) {
