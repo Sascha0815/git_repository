@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -259,6 +260,7 @@ public class Steuerung {
 		dialogNewApplicant.add(tabAdd);
 		tabAdd.addTab("Allgemein", panelDialog);
 		tabAdd.addTab("Bewerbung", panelDialog2);
+		SwingUtilities.updateComponentTreeUI(dialogNewApplicant);
 
 	}
 	
@@ -341,6 +343,8 @@ public class Steuerung {
 		dialogNewVacancy.add(tabVacancy);
 		tabVacancy.addTab("Allgemein", panelDialog3);
 		tabVacancy.addTab("Spezifikation", panelDialog4);
+		SwingUtilities.updateComponentTreeUI(dialogNewVacancy);
+		
 
 	}
 
