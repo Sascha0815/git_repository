@@ -32,6 +32,7 @@ public class Steuerung {
 	private JPanel panelDialog2 = new JPanel();
 	private JPanel panelDialog3 = new JPanel();
 	private JPanel panelDialog4 = new JPanel();
+	private JPanel panelDialog5 = new JPanel();
 
 	// Neuer Bewerber
 	private JLabel labelName = new JLabel();
@@ -44,6 +45,9 @@ public class Steuerung {
 	private JLabel labelDate = new JLabel();
 	private JLabel labelEducationalAchievement = new JLabel();
 	private JLabel labelCity = new JLabel();
+	private JLabel labelTelefonHome = new JLabel();
+	private JLabel labelTelefonMobil = new JLabel();
+	private JLabel labelEmail = new JLabel();
 
 	private JTextField fieldVacancy = new JTextField();
 	private JTextField fieldDate = new JTextField();
@@ -53,6 +57,9 @@ public class Steuerung {
 	private JTextField fieldHouseNr = new JTextField();
 	private JTextField fieldPostalCode = new JTextField();
 	private JTextField fieldCity = new JTextField();
+	private JTextField fieldTelefonHome = new JTextField();
+	private JTextField fieldTelefonMobil = new JTextField();
+	private JTextField fieldEmail = new JTextField();
 
 	private String[] boxListEducationalAchievement = { "Bitte auswählen",
 			"Haupptschulabschluss", "Mittlere Reife", "Abitur", "Studium" };
@@ -294,12 +301,32 @@ public class Steuerung {
 		boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
 		panelDialog2.add(boxEducationalAchievement);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog2.add(Oberflaeche.save);
+		// PanelDialog2 neuer Bewerber_Kontaktdaten
+		panelDialog5.setBackground(Color.LIGHT_GRAY);
+		panelDialog5.setLayout(new BoxLayout(panelDialog5, BoxLayout.Y_AXIS));
+		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialog5.add(labelTelefonHome);
+		labelTelefonHome.setText("Telefon privat:");
+		panelDialog5.add(fieldTelefonHome);
+		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
+		fieldTelefonHome.setFont(fontTextField);
+		panelDialog5.add(labelTelefonMobil);
+		labelTelefonMobil.setText("Telefon mobil:");
+		panelDialog5.add(fieldTelefonMobil);
+		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
+		fieldTelefonMobil.setFont(fontTextField);
+		panelDialog5.add(labelEmail);
+		labelEmail.setText("Email:");
+		panelDialog5.add(fieldEmail);
+		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
+		fieldEmail.setFont(fontTextField);
+		panelDialog5.add(Oberflaeche.save);
 
 		// TabbedPane Dialog
 		dialogNewApplicant.add(tabAdd);
 		tabAdd.addTab("Allgemein", panelDialog);
 		tabAdd.addTab("Bewerbung", panelDialog2);
+		tabAdd.addTab("Kontaktdaten", panelDialog5);
 		SwingUtilities.updateComponentTreeUI(dialogNewApplicant);
 
 	}
@@ -394,7 +421,6 @@ public class Steuerung {
 		boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
 		panelDialog4.add(boxEducationalAchievement);
 		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
-
 		panelDialog4.add(Oberflaeche.save);
 
 		// TabbedPane Dialog
