@@ -70,7 +70,7 @@ public class Oberflaeche extends JFrame {
 	};
 
 	private JTable tableJob = new JTable(modelJob);
-	private JTable tableApplicant = new JTable();
+	public static JTable tableApplicant = new JTable();
 
 	private JLabel labelApplicantPic = new JLabel();
 	private JLabel labelBackground = new JLabel();
@@ -346,6 +346,7 @@ public class Oberflaeche extends JFrame {
 		// SWING: Table Bewerberpool
 		modelPool.setColumnIdentifiers(COLUMN_IDENTIFIERS_APPLICANT);
 		tableApplicant.getTableHeader().setReorderingAllowed(false);
+		tableApplicant.setAutoCreateRowSorter(true);
 		tableApplicant = new JTable(modelPool);
 		tableApplicant.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {

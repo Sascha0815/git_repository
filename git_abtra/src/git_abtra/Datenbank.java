@@ -55,6 +55,7 @@ public class Datenbank {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		Oberflaeche.tableApplicant.setAutoCreateRowSorter(true);
 		return results;
 	}
 
