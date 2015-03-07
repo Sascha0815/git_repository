@@ -97,6 +97,10 @@ public class Oberflaeche extends JFrame {
 			add("Hausnummer");
 			add("PLZ");
 			add("Wohnort");
+			add("Arbeitsstelle");
+			add("Datum");
+			add("Bildungsabschluss");
+
 		}
 	};
 

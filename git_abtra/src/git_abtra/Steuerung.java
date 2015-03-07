@@ -62,6 +62,21 @@ public class Steuerung {
 			"Haupptschulabschluss", "Mittlere Reife", "Abitur", "Studium" };
 	private JComboBox boxEducationalAchievement = new JComboBox(
 			boxListEducationalAchievement);
+	private String[] boxListDay = { "Bitte auswählen", "01", "02", "03", "04",
+			"05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15",
+			"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26",
+			"27", "28", "29", "30", "31" };
+	private JComboBox boxDay = new JComboBox(boxListDay);
+	private String[] boxListMonth = { "Bitte auswählen", "Januar", "Februar",
+			"März", "April", "Mai", "Juni", "Juli", "August", "September",
+			"Oktober", "November", "Dezember" };
+	private JComboBox boxMonth = new JComboBox(boxListMonth);
+	private String[] boxListYear = { "Bitte auswählen", "2000", "1999", "1998",
+			"1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990",
+			"1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982",
+			"1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974",
+			"1973", "1972", "1971", "1970" };
+	private JComboBox boxYear = new JComboBox(boxListYear);
 
 	private JTabbedPane tabAdd = new JTabbedPane(JTabbedPane.TOP,
 			JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -87,6 +102,9 @@ public class Steuerung {
 	public static int houseNr;
 	public static int postalCode;
 	public static String city;
+	public static String vacancy;
+	public static char[] date;
+	public static String educationalAchievement;
 
 	public static void main(String[] args) {
 		// Design des Programms
@@ -114,6 +132,10 @@ public class Steuerung {
 		houseNr = Integer.parseInt(fieldHouseNr.getText());
 		postalCode = Integer.parseInt(fieldPostalCode.getText());
 		city = fieldCity.getText();
+		vacancy = fieldVacancy.getText();
+		date = fieldDate.getText().toCharArray();
+		educationalAchievement = (String) boxEducationalAchievement
+				.getSelectedItem();
 
 		if (name.equals("")) {
 			return false;
@@ -130,7 +152,16 @@ public class Steuerung {
 		if ((postalCode == 0)) {
 			return false;
 		}
-		if (!(city.equals(""))) {
+		if (city.equals("")) {
+			return false;
+		}
+		if (vacancy.equals("")) {
+			return false;
+		}
+		if (date.equals("")) {
+			return false;
+		}
+		if (educationalAchievement.equals("")) {
 			return false;
 		} else {
 			return true;
@@ -239,10 +270,29 @@ public class Steuerung {
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldVacancy.setFont(fontTextField);
 		panelDialog2.add(labelDate);
-		labelDate.setText("Datum der Bewerbung:");
-		panelDialog2.add(fieldDate);
+		String[] boxListDay = { "Bitte auswählen", "01", "02", "03", "04",
+				"05", "06", "07", "08", "09", "10", "11", "12", "13", "14",
+				"15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
+				"25", "26", "27", "28", "29", "30", "31" };
+		JComboBox boxDay = new JComboBox(boxListDay);
+		boxDay.setToolTipText("Tag");
+		panelDialog2.add(boxDay);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
-		fieldDate.setFont(fontTextField);
+		JComboBox boxMonth = new JComboBox(boxListMonth);
+		String[] boxListMonth = { "Bitte auswählen", "Januar", "Februar",
+				"März", "April", "Mai", "Juni", "Juli", "August", "September",
+				"Oktober", "November", "Dezember" };
+		boxMonth.setToolTipText("Monat");
+		panelDialog2.add(boxMonth);
+		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
+		String[] boxListYear = { "Bitte auswählen", "2000", "1999", "1998",
+				"1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990",
+				"1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982",
+				"1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974",
+				"1973", "1972", "1971", "1970" };
+		JComboBox boxYear = new JComboBox(boxListYear);
+		boxYear.setToolTipText("Jahr");
+		panelDialog2.add(boxYear);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDialog2.add(labelEducationalAchievement);
 		boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
@@ -257,8 +307,6 @@ public class Steuerung {
 		SwingUtilities.updateComponentTreeUI(dialogNewApplicant);
 
 	}
-	
-	
 
 	// METODE: Bewerber Dialog löschen
 	public void closeDialogAddApplicant() {
@@ -277,7 +325,7 @@ public class Steuerung {
 		street = "";
 		houseNr = 0;
 		postalCode = 0;
-		city = "";		
+		city = "";
 		tabAdd.removeAll();
 		dialogNewApplicant.dispose();
 	}
@@ -318,11 +366,30 @@ public class Steuerung {
 		panelDialog4.add(fieldLevel);
 		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldLevel.setFont(fontTextField);
-		panelDialog4.add(labelDate);
-		labelDate.setText("Datum der Bewerbung:");
-		panelDialog4.add(fieldDate);
+		String[] boxListDay = { "Bitte auswählen", "01", "02", "03", "04",
+				"05", "06", "07", "08", "09", "10", "11", "12", "13", "14",
+				"15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
+				"25", "26", "27", "28", "29", "30", "31" };
+		JComboBox boxDay = new JComboBox(boxListDay);
+		boxDay.setToolTipText("Tag");
+		panelDialog4.add(boxDay);
 		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
-		fieldDate.setFont(fontTextField);
+		JComboBox boxMonth = new JComboBox(boxListMonth);
+		String[] boxListMonth = { "Bitte auswählen", "Januar", "Februar",
+				"März", "April", "Mai", "Juni", "Juli", "August", "September",
+				"Oktober", "November", "Dezember" };
+		boxMonth.setToolTipText("Monat");
+		panelDialog4.add(boxMonth);
+		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
+		String[] boxListYear = { "Bitte auswählen", "2000", "1999", "1998",
+				"1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990",
+				"1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982",
+				"1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974",
+				"1973", "1972", "1971", "1970" };
+		JComboBox boxYear = new JComboBox(boxListYear);
+		boxYear.setToolTipText("Jahr");
+		panelDialog4.add(boxYear);
+		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
 		String[] boxListEducationalAchievement = { "Bitte auswählen",
 				"Haupptschulabschluss", "Mittlere Reife", "Abitur", "Studium" };
 		JComboBox boxEducationalAchievement = new JComboBox(
@@ -331,6 +398,7 @@ public class Steuerung {
 		boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
 		panelDialog4.add(boxEducationalAchievement);
 		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
+
 		panelDialog4.add(Oberflaeche.save);
 
 		// TabbedPane Dialog
@@ -338,7 +406,6 @@ public class Steuerung {
 		tabVacancy.addTab("Allgemein", panelDialog3);
 		tabVacancy.addTab("Spezifikation", panelDialog4);
 		SwingUtilities.updateComponentTreeUI(dialogNewVacancy);
-		
 
 	}
 
