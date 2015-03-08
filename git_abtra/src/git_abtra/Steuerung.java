@@ -159,7 +159,7 @@ public class Steuerung {
 		month = (int) boxMonth.getSelectedItem();
 		year = (int) boxYear.getSelectedItem();		
 		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.MONTH, (month-1));
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		
 		
