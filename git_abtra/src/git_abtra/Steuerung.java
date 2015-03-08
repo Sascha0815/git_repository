@@ -39,19 +39,19 @@ public class Steuerung {
 	private JPanel panelDialog5 = new JPanel();
 
 	// Neuer Bewerber
-	private JLabel labelName = new JLabel();
-	private JLabel labelFirstName = new JLabel();
-	private JLabel labelStreet = new JLabel();
-	private JLabel labelHouseNr = new JLabel();
-	private JLabel labelPostalCode = new JLabel();
-	private JLabel labelInstruction = new JLabel();
-	private JLabel labelVacancy = new JLabel();
-	private JLabel labelDate = new JLabel();
-	private JLabel labelEducationalAchievement = new JLabel();
-	private JLabel labelCity = new JLabel();
-	private JLabel labelTelefonHome = new JLabel();
-	private JLabel labelTelefonMobil = new JLabel();
-	private JLabel labelEmail = new JLabel();
+	private JLabel labelName = new JLabel("Name:");
+	private JLabel labelFirstName = new JLabel("Vorname:");
+	private JLabel labelStreet = new JLabel("Straße:");
+	private JLabel labelHouseNr = new JLabel("Hausnummer:");
+	private JLabel labelPostalCode = new JLabel("PLZ:");
+	private JLabel labelInstruction = new JLabel("Bitte tragen Sie alle erforderlichen Daten ein!");
+	private JLabel labelVacancy = new JLabel("Bewerbung für die Stelle:");
+	private JLabel labelDate = new JLabel("Geburtsdatum:");
+	private JLabel labelEducationalAchievement = new JLabel("Höchster Bildungsabschluss:");
+	private JLabel labelCity = new JLabel("Wohnort:");
+	private JLabel labelTelefonHome = new JLabel("Telefon privat:");
+	private JLabel labelTelefonMobil = new JLabel("Telefon mobil");
+	private JLabel labelEmail = new JLabel("E-Mail:");
 	
 
 	private JTextField fieldVacancy = new JTextField();
@@ -288,37 +288,29 @@ public class Steuerung {
 		panelDialog.setLayout(new BoxLayout(panelDialog, BoxLayout.Y_AXIS));
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDialog.add(labelInstruction);
-		labelInstruction
-				.setText("Bitte tragen Sie alle erfoderlichen Daten ein!");
 		labelInstruction.setFont(fontHeadline);
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDialog.add(labelName);
-		labelName.setText("Name:");
 		panelDialog.add(fieldName);
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldName.setFont(fontTextField);
 		panelDialog.add(labelFirstName);
-		labelFirstName.setText("Vorname:");
 		panelDialog.add(fieldFirstName);
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldFirstName.setFont(fontTextField);
 		panelDialog.add(labelStreet);
-		labelStreet.setText("Straße:");
 		panelDialog.add(fieldStreet);
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldStreet.setFont(fontTextField);
 		panelDialog.add(labelHouseNr);
-		labelHouseNr.setText("Hausnummer:");
 		panelDialog.add(fieldHouseNr);
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldHouseNr.setFont(fontTextField);
 		panelDialog.add(labelPostalCode);
-		labelPostalCode.setText("PLZ:");
 		panelDialog.add(fieldPostalCode);
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldPostalCode.setFont(fontTextField);
 		panelDialog.add(labelCity);
-		labelCity.setText("Wohnort:");
 		panelDialog.add(fieldCity);
 		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldCity.setFont(fontTextField);
@@ -327,12 +319,11 @@ public class Steuerung {
 		panelDialog2.setLayout(new BoxLayout(panelDialog2, BoxLayout.Y_AXIS));
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDialog2.add(labelVacancy);
-		labelVacancy.setText("Bewerbung für die Stelle:");
+		labelVacancy.setFont(fontTextField);
 		panelDialog2.add(fieldVacancy);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldVacancy.setFont(fontTextField);
 		panelDialog2.add(labelDate);	
-		labelDate.setText("Geburtsdatum:");
 		labelDate.setFont(fontTextField);
 		boxDay.setToolTipText("Tag");
 		panelDialog2.add(boxDay);
@@ -344,9 +335,8 @@ public class Steuerung {
 		panelDialog2.add(boxYear);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDialog2.add(labelEducationalAchievement);
-		labelEducationalAchievement.setText("Abschluss:");
 		labelEducationalAchievement.setFont(fontTextField);
-		boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
+		boxEducationalAchievement.setToolTipText("Höchster Bildungsabschluss:");
 		panelDialog2.add(boxEducationalAchievement);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		// PanelDialog2 neuer Bewerber_Kontaktdaten
@@ -354,17 +344,14 @@ public class Steuerung {
 		panelDialog5.setLayout(new BoxLayout(panelDialog5, BoxLayout.Y_AXIS));
 		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDialog5.add(labelTelefonHome);
-		labelTelefonHome.setText("Telefon privat:");
 		panelDialog5.add(fieldTelefonHome);
 		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldTelefonHome.setFont(fontTextField);
 		panelDialog5.add(labelTelefonMobil);
-		labelTelefonMobil.setText("Telefon mobil:");
 		panelDialog5.add(fieldTelefonMobil);
 		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldTelefonMobil.setFont(fontTextField);
 		panelDialog5.add(labelEmail);
-		labelEmail.setText("Email:");
 		panelDialog5.add(fieldEmail);
 		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldEmail.setFont(fontTextField);
