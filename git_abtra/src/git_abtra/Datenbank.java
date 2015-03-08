@@ -11,8 +11,8 @@ public class Datenbank {
 		PreparedStatement preparedStatement = null;
 
 		String insertTableSQL = "INSERT INTO applicant"
-				+ "(name, firstName, street, houseNr, postalCode, city, vacancy, date, educationalAchievement) VALUES"
-				+ "(?,?,?,?,?,?,?,?,?)";
+				+ "(name, firstName, street, houseNr, postalCode, city, telefonHome, telefonMobil, email, vacancy, date, educationalAchievement) VALUES"
+				+ "(?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			dbConnection = DriverManager.getConnection(
@@ -25,9 +25,12 @@ public class Datenbank {
 			preparedStatement.setInt(4, Oberflaeche.steuerung.houseNr);
 			preparedStatement.setInt(5, Oberflaeche.steuerung.postalCode);
 			preparedStatement.setString(6, Oberflaeche.steuerung.city);
-			preparedStatement.setString(7, Oberflaeche.steuerung.vacancy);
-			preparedStatement.setString(8, Oberflaeche.steuerung.date);
-			preparedStatement.setString(9,
+			preparedStatement.setString(7, Oberflaeche.steuerung.telefonHome);
+			preparedStatement.setString(8, Oberflaeche.steuerung.telefonMobil);
+			preparedStatement.setString(9, Oberflaeche.steuerung.email);
+			preparedStatement.setString(10, Oberflaeche.steuerung.vacancy);
+			preparedStatement.setString(11, Oberflaeche.steuerung.date);
+			preparedStatement.setString(12,
 					Oberflaeche.steuerung.educationalAchievement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -57,6 +60,9 @@ public class Datenbank {
 				applicant.add(rs.getString(7));
 				applicant.add(rs.getString(8));
 				applicant.add(rs.getString(9));
+				applicant.add(rs.getString(10));
+				applicant.add(rs.getString(11));
+				applicant.add(rs.getString(12));
 				results.add(applicant);
 			}
 		} catch (SQLException e) {

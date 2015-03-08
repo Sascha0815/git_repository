@@ -106,6 +106,9 @@ public class Steuerung {
 	public static int postalCode;
 	public static String city;
 	public static String vacancy;
+	public static String telefonHome;
+	public static String telefonMobil;
+	public static String email;
 	public static String date;
 	public static String educationalAchievement;
 
@@ -136,13 +139,16 @@ public class Steuerung {
 		postalCode = Integer.parseInt(fieldPostalCode.getText());
 		city = fieldCity.getText();
 		vacancy = fieldVacancy.getText();
+		telefonHome = fieldTelefonHome.getText();
+		telefonMobil = fieldTelefonMobil.getText();
+		email = fieldEmail.getText();
 		String day = String.valueOf(boxDay.getSelectedItem());
 		String month = String.valueOf(boxMonth.getSelectedItem());
 		String year = String.valueOf(boxYear.getSelectedItem());
+		date = day + "." + month + "." + year;
 		educationalAchievement = String.valueOf(boxEducationalAchievement
 				.getSelectedItem());
-		date = day + "." + month + "." + year;
-
+		
 		if (name.equals("")) {
 			return false;
 		}
@@ -165,6 +171,15 @@ public class Steuerung {
 			return false;
 		}
 		if (educationalAchievement.equals("")) {
+			return false;
+		}
+		if (telefonHome.equals("")) {
+			return false;
+		}
+		if (telefonMobil.equals("")) {
+			return false;
+		}
+		if (email.equals("")) {
 			return false;
 		} else {
 			return true;
