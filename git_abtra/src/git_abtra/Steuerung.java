@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -48,6 +52,7 @@ public class Steuerung {
 	private JLabel labelTelefonHome = new JLabel();
 	private JLabel labelTelefonMobil = new JLabel();
 	private JLabel labelEmail = new JLabel();
+	
 
 	private JTextField fieldVacancy = new JTextField();
 	private JTextField fieldDate = new JTextField();
@@ -61,29 +66,28 @@ public class Steuerung {
 	private JTextField fieldTelefonMobil = new JTextField();
 	private JTextField fieldEmail = new JTextField();
 
-	private String[] boxListEducationalAchievement = { "Bitte auswählen",
-			"Haupptschulabschluss", "Mittlere Reife", "Abitur", "Studium" };
+	private String[] boxListEducationalAchievement = { "Haupptschulabschluss", "Mittlere Reife", "Abitur", "Studium" };
 	private JComboBox boxEducationalAchievement = new JComboBox(
 			boxListEducationalAchievement);
-	private String[] boxListDay = { "Bitte auswählen", "01", "02", "03", "04",
-			"05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15",
-			"16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26",
-			"27", "28", "29", "30", "31" };
+	private Integer[] boxListDay = { 1, 2, 3, 4,
+			5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+			16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+			27, 28, 29, 30, 31 };
 	private JComboBox boxDay = new JComboBox(boxListDay);
-	private String[] boxListMonth = { "Bitte auswählen", "Januar", "Februar",
-			"März", "April", "Mai", "Juni", "Juli", "August", "September",
-			"Oktober", "November", "Dezember" };
+	private Integer[] boxListMonth = { 1, 2,
+			3, 4, 5, 6, 7, 8, 9, 
+			10, 11, 12 };
 	private JComboBox boxMonth = new JComboBox(boxListMonth);
-	private String[] boxListYear = { "Bitte auswählen", "2000", "1999", "1998",
-			"1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990",
-			"1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982",
-			"1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974",
-			"1973", "1972", "1971", "1970" };
+	private Integer[] boxListYear = {  2000, 1999, 1998,
+			1997, 1996, 1995, 1994, 1993, 1992, 1991, 1990,
+			1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982,
+			1981, 1980, 1979, 1978, 1977, 1976, 1975, 1974,
+			1973, 1972, 1971, 1970 };
 	private JComboBox boxYear = new JComboBox(boxListYear);
-
+	public static Calendar cal = Calendar.getInstance();
 	private JTabbedPane tabAdd = new JTabbedPane(JTabbedPane.TOP,
 			JTabbedPane.SCROLL_TAB_LAYOUT);
-
+	
 	// Neue Stelle
 	private JLabel labelArea = new JLabel();
 	private JLabel labelPosition = new JLabel();
@@ -109,13 +113,17 @@ public class Steuerung {
 	public static String telefonHome;
 	public static String telefonMobil;
 	public static String email;
-	public static String dateApplicant;
+	public static java.sql.Date dateOfApplication;
 	public static String educationalAchievement;
+	public static int day;
+	public static int month;
+	public static int year;
 
 	public static String area;
 	public static String position;
 	public static String level;
 	public static String dateVacancy;
+
 
 	public static void main(String[] args) {
 		// Design des Programms
@@ -147,10 +155,14 @@ public class Steuerung {
 		telefonHome = fieldTelefonHome.getText();
 		telefonMobil = fieldTelefonMobil.getText();
 		email = fieldEmail.getText();
-		String day = String.valueOf(boxDay.getSelectedItem());
-		String month = String.valueOf(boxMonth.getSelectedItem());
-		String year = String.valueOf(boxYear.getSelectedItem());
-		dateApplicant = day + "." + month + "." + year;
+	    day = (int) boxDay.getSelectedItem();
+		month = (int) boxMonth.getSelectedItem();
+		year = (int) boxYear.getSelectedItem();		
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		
+		
 		educationalAchievement = String.valueOf(boxEducationalAchievement
 				.getSelectedItem());
 
@@ -319,32 +331,21 @@ public class Steuerung {
 		panelDialog2.add(fieldVacancy);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldVacancy.setFont(fontTextField);
-		panelDialog2.add(labelDate);
-		String[] boxListDay = { "Bitte auswählen", "01", "02", "03", "04",
-				"05", "06", "07", "08", "09", "10", "11", "12", "13", "14",
-				"15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
-				"25", "26", "27", "28", "29", "30", "31" };
-		JComboBox boxDay = new JComboBox(boxListDay);
+		panelDialog2.add(labelDate);	
+		labelDate.setText("Geburtsdatum:");
+		labelDate.setFont(fontTextField);
 		boxDay.setToolTipText("Tag");
 		panelDialog2.add(boxDay);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
-		JComboBox boxMonth = new JComboBox(boxListMonth);
-		String[] boxListMonth = { "Bitte auswählen", "Januar", "Februar",
-				"März", "April", "Mai", "Juni", "Juli", "August", "September",
-				"Oktober", "November", "Dezember" };
 		boxMonth.setToolTipText("Monat");
 		panelDialog2.add(boxMonth);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
-		String[] boxListYear = { "Bitte auswählen", "2000", "1999", "1998",
-				"1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990",
-				"1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982",
-				"1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974",
-				"1973", "1972", "1971", "1970" };
-		JComboBox boxYear = new JComboBox(boxListYear);
 		boxYear.setToolTipText("Jahr");
 		panelDialog2.add(boxYear);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
 		panelDialog2.add(labelEducationalAchievement);
+		labelEducationalAchievement.setText("Abschluss:");
+		labelEducationalAchievement.setFont(fontTextField);
 		boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
 		panelDialog2.add(boxEducationalAchievement);
 		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -382,6 +383,7 @@ public class Steuerung {
 	public void closeDialogAddApplicant() {
 		panelDialog.removeAll();
 		panelDialog2.removeAll();
+		panelDialog5.removeAll();
 		fieldVacancy.setText("");
 		fieldDate.setText("");
 		fieldName.setText("");

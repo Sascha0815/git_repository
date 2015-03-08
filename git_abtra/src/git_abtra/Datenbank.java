@@ -29,8 +29,7 @@ public class Datenbank {
 			preparedStatement.setString(8, Oberflaeche.steuerung.telefonMobil);
 			preparedStatement.setString(9, Oberflaeche.steuerung.email);
 			preparedStatement.setString(10, Oberflaeche.steuerung.vacancy);
-			preparedStatement
-					.setString(11, Oberflaeche.steuerung.dateApplicant);
+			preparedStatement.setDate(11, new java.sql.Date(Oberflaeche.steuerung.cal.getTimeInMillis()));
 			preparedStatement.setString(12,
 					Oberflaeche.steuerung.educationalAchievement);
 			preparedStatement.executeUpdate();
