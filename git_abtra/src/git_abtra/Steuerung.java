@@ -109,8 +109,13 @@ public class Steuerung {
 	public static String telefonHome;
 	public static String telefonMobil;
 	public static String email;
-	public static String date;
+	public static String dateApplicant;
 	public static String educationalAchievement;
+
+	public static String area;
+	public static String position;
+	public static String level;
+	public static String dateVacancy;
 
 	public static void main(String[] args) {
 		// Design des Programms
@@ -130,7 +135,7 @@ public class Steuerung {
 	}
 
 	// METHODE: Bewerbereingabe überprüfen
-	public boolean controlInput() {
+	public boolean controlInputApplicant() {
 
 		name = fieldName.getText();
 		firstName = fieldFirstName.getText();
@@ -145,10 +150,10 @@ public class Steuerung {
 		String day = String.valueOf(boxDay.getSelectedItem());
 		String month = String.valueOf(boxMonth.getSelectedItem());
 		String year = String.valueOf(boxYear.getSelectedItem());
-		date = day + "." + month + "." + year;
+		dateApplicant = day + "." + month + "." + year;
 		educationalAchievement = String.valueOf(boxEducationalAchievement
 				.getSelectedItem());
-		
+
 		if (name.equals("")) {
 			return false;
 		}
@@ -180,6 +185,33 @@ public class Steuerung {
 			return false;
 		}
 		if (email.equals("")) {
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+
+	// METHODE: Arbeitsstelleneingabe überprüfen
+	public boolean controlInputVacancy() {
+		area = fieldArea.getText();
+		position = fieldPosition.getText();
+		level = fieldLevel.getText();
+		String day = String.valueOf(boxDay.getSelectedItem());
+		String month = String.valueOf(boxMonth.getSelectedItem());
+		String year = String.valueOf(boxYear.getSelectedItem());
+		dateVacancy = day + "." + month + "." + year;
+
+		if (area.equals("")) {
+			return false;
+		}
+		if (position.equals("")) {
+			return false;
+		}
+		if (level.equals("")) {
+			return false;
+		}
+		if (dateVacancy.equals("")) {
 			return false;
 		} else {
 			return true;

@@ -171,8 +171,10 @@ public class Oberflaeche extends JFrame {
 		}
 		buttonRefreshApplicant.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vector results = datenbank.insertDataIntoTable();
-				modelPool.setDataVector(results, COLUMN_IDENTIFIERS_APPLICANT);
+				Vector resultsApplicant = datenbank
+						.insertApplicantDataIntoTable();
+				modelPool.setDataVector(resultsApplicant,
+						COLUMN_IDENTIFIERS_APPLICANT);
 				modelPool.fireTableDataChanged();
 			}
 		});
@@ -446,9 +448,9 @@ public class Oberflaeche extends JFrame {
 
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				steuerung.controlInput();
+				steuerung.controlInputApplicant();
 				try {
-					datenbank.insertDataIntoDatabase();
+					datenbank.insertApplicantData();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

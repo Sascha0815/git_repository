@@ -6,7 +6,7 @@ import java.util.Vector;
 public class Datenbank {
 
 	// METHODE: Bewerberdaten in Datenbank eintragen
-	public void insertDataIntoDatabase() throws SQLException {
+	public void insertApplicantData() throws SQLException {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -29,7 +29,8 @@ public class Datenbank {
 			preparedStatement.setString(8, Oberflaeche.steuerung.telefonMobil);
 			preparedStatement.setString(9, Oberflaeche.steuerung.email);
 			preparedStatement.setString(10, Oberflaeche.steuerung.vacancy);
-			preparedStatement.setString(11, Oberflaeche.steuerung.date);
+			preparedStatement
+					.setString(11, Oberflaeche.steuerung.dateApplicant);
 			preparedStatement.setString(12,
 					Oberflaeche.steuerung.educationalAchievement);
 			preparedStatement.executeUpdate();
@@ -38,10 +39,33 @@ public class Datenbank {
 		}
 	}
 
-	// METHODE: Bewerberdaten in Tabelle anzeigen
-	protected Vector insertDataIntoTable() {
+	// METHODE: Arbeitsstellendaten in Datenbank eintragen
+	public void insertVacancyData() throws SQLException {
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
 
-		Vector results = new Vector();
+		String insertTableSQL = "INSERT INTO vacancy"
+				+ "(area, position, level, date) VALUES" + "(?,?,?,?)";
+
+		try {
+			dbConnection = DriverManager.getConnection(
+					"jdbc:mysql://185.28.20.242:3306/u474396146_db",
+					"u474396146_aptra", "aptraDB");
+			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+			preparedStatement.setString(1, Oberflaeche.steuerung.area);
+			preparedStatement.setString(2, Oberflaeche.steuerung.position);
+			preparedStatement.setString(3, Oberflaeche.steuerung.level);
+			preparedStatement.setString(4, Oberflaeche.steuerung.dateVacancy);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	// METHODE: Bewerberdaten in Tabelle anzeigen
+	protected Vector insertApplicantDataIntoTable() {
+
+		Vector resultsApplicant = new Vector();
 		try {
 			Connection con = DriverManager.getConnection(
 					"jdbc:mysql://185.28.20.242:3306/u474396146_db",
@@ -63,13 +87,39 @@ public class Datenbank {
 				applicant.add(rs.getString(10));
 				applicant.add(rs.getString(11));
 				applicant.add(rs.getString(12));
-				results.add(applicant);
+				resultsApplicant.add(applicant);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		Oberflaeche.tableApplicant.setAutoCreateRowSorter(true);
-		return results;
+		return resultsApplicant;
+	}
+
+	// METHODE: Arbeitsstellendaten in Tabelle anzeigen
+	protected Vector insertVacancyDataIntoTable() {
+
+		Vector resultsVacancy = new Vector();
+		try {
+			Connection con = DriverManager.getConnection(
+					"jdbc:mysql://185.28.20.242:3306/u474396146_db",
+					"u474396146_aptra", "aptraDB");
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("Select * from vacancy");
+
+			while (rs.next()) {
+				Vector applicant = new Vector();
+				applicant.add(rs.getString(1));
+				applicant.add(rs.getString(2));
+				applicant.add(rs.getString(3));
+				applicant.add(rs.getString(4));
+				resultsVacancy.add(applicant);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		Oberflaeche.tableApplicant.setAutoCreateRowSorter(true);
+		return resultsVacancy;
 	}
 
 	// METHODE: Standardkonstruktor
