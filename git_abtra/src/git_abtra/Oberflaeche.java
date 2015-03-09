@@ -84,7 +84,8 @@ public class Oberflaeche extends JFrame {
 	final public static Steuerung steuerung = new Steuerung();
 
 	public final static Vector COLUMN_IDENTIFIERS_APPLICANT = new Vector() {
-		{
+		{ 
+			add("Bewerbernummer");
 			add("Name");
 			add("Vorname");
 			add("Straﬂe");
@@ -204,6 +205,11 @@ public class Oberflaeche extends JFrame {
 			buttonDelete.setIcon(new ImageIcon(trashcan));
 		} catch (IOException ex) {
 		}
+		buttonDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				datenbank.deleteApplicant();
+			}
+		});
 		buttonSettings.setToolTipText("Einstellungen");
 		panelButton2.add(buttonSettings);
 		buttonSettings.setPreferredSize(new Dimension(135, 135));

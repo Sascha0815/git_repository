@@ -86,6 +86,7 @@ public class Datenbank {
 				applicant.add(rs.getString(10));
 				applicant.add(rs.getString(11));
 				applicant.add(rs.getString(12));
+				applicant.add(rs.getString(13));
 				resultsApplicant.add(applicant);
 			}
 		} catch (SQLException e) {
@@ -121,6 +122,39 @@ public class Datenbank {
 		return resultsVacancy;
 	}
 
+	//METHODE: Bewerber löschen
+	public void deleteApplicant(){
+		String query = "delete from users where id = ?";
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			dbConnection = DriverManager.getConnection(
+					"jdbc:mysql://185.28.20.242:3306/u474396146_db",
+					"u474396146_aptra", "aptraDB");
+		}
+			catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		
+	int [] rows = Oberflaeche.tableApplicant.getSelectedRows(); 	
+	for (int i = 0; i < (rows.length); i++) {
+		try {
+			 
+		     PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
+		     preparedStmt.setInt(i, i);
+		     preparedStmt.execute();
+		     
+		} catch (Exception e) {
+			
+		}
+	}
+		
+	
+	}
+		
+	
+	
+	
 	// METHODE: Standardkonstruktor
 	public Datenbank() {
 
