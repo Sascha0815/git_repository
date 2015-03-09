@@ -379,6 +379,9 @@ public class Steuerung {
 		fieldHouseNr.setText("");
 		fieldPostalCode.setText("");
 		fieldCity.setText("");
+		fieldTelefonHome.setText("");
+		fieldTelefonMobil.setText("");
+		fieldEmail.setText("");
 		name = "";
 		firstName = "";
 		street = "";

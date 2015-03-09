@@ -124,7 +124,7 @@ public class Datenbank {
 
 	//METHODE: Bewerber löschen
 	public void deleteApplicant(){
-		String query = "delete from users where id = ?";
+		String query = "delete from applicant where id = ?";
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 		try {
@@ -137,11 +137,11 @@ public class Datenbank {
 			}
 		
 	int [] rows = Oberflaeche.tableApplicant.getSelectedRows(); 	
-	for (int i = 0; i < (rows.length); i++) {
+	for (int i = 0; i <= (rows.length); i++) {
 		try {
 			 
 		     PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
-		     preparedStmt.setInt(i, i);
+		     preparedStmt.setInt(rows[i], rows[i]);
 		     preparedStmt.execute();
 		     
 		} catch (Exception e) {
