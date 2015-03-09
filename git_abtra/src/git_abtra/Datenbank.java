@@ -138,8 +138,9 @@ public class Datenbank {
 		
 	int [] rows = Oberflaeche.tableApplicant.getSelectedRows(); 	
 	for (int i = 0; i <= (rows.length); i++) {
-		try {			
-			String query = "delete from applicant where id = "+i;
+		try {	
+			int id = (rows[i])+1;
+			String query = "delete from applicant where id = "+id;
 			PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
 		    preparedStmt.execute();
 		     
