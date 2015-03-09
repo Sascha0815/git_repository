@@ -388,6 +388,10 @@ public class Steuerung {
 		houseNr = 0;
 		postalCode = 0;
 		city = "";
+		boxDay.setSelectedIndex(0);
+		boxMonth.setSelectedIndex(0);
+		boxYear.setSelectedIndex(0);
+		boxEducationalAchievement.setSelectedIndex(0);
 		tabAdd.removeAll();
 		dialogNewApplicant.dispose();
 	}

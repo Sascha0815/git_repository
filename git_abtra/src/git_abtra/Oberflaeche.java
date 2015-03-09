@@ -208,6 +208,11 @@ public class Oberflaeche extends JFrame {
 		buttonDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				datenbank.deleteApplicant();
+				Vector resultsApplicant = datenbank
+						.insertApplicantDataIntoTable();
+				modelPool.setDataVector(resultsApplicant,
+						COLUMN_IDENTIFIERS_APPLICANT);
+				modelPool.fireTableDataChanged();
 			}
 		});
 		buttonSettings.setToolTipText("Einstellungen");
@@ -390,6 +395,11 @@ public class Oberflaeche extends JFrame {
 					e.printStackTrace();
 				}
 				steuerung.closeDialogAddApplicant();
+				Vector resultsApplicant = datenbank
+						.insertApplicantDataIntoTable();
+				modelPool.setDataVector(resultsApplicant,
+						COLUMN_IDENTIFIERS_APPLICANT);
+				modelPool.fireTableDataChanged();
 			}
 
 		});
