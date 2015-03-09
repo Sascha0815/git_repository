@@ -123,10 +123,10 @@ public class Datenbank {
 	}
 
 	//METHODE: Bewerber löschen
-	public void deleteApplicant(){
-		String query = "delete from applicant where id = ?";
+	public void deleteApplicant(){	
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
+		
 		try {
 			dbConnection = DriverManager.getConnection(
 					"jdbc:mysql://185.28.20.242:3306/u474396146_db",
@@ -138,17 +138,26 @@ public class Datenbank {
 		
 	int [] rows = Oberflaeche.tableApplicant.getSelectedRows(); 	
 	for (int i = 0; i <= (rows.length); i++) {
-		try {
-			 
-		     PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
-		     preparedStmt.setInt(rows[i], rows[i]);
-		     preparedStmt.execute();
+		try {			
+			String query = "delete from applicant where id = "+i;
+			PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
+		    preparedStmt.execute();
 		     
 		} catch (Exception e) {
 			
 		}
 	}
 		
+	try {
+		String query = "ALTER TABLE `applicant` DROP `id`";
+		PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
+	    preparedStmt.execute();
+	    query = "ALTER TABLE `applicant` ADD `id` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST";
+		preparedStmt = dbConnection.prepareStatement(query);
+		preparedStmt.execute();
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
 	
 	}
 		
