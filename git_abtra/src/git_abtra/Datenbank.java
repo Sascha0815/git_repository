@@ -34,7 +34,7 @@ public class Datenbank {
 					Oberflaeche.steuerung.educationalAchievement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("insert problems - Datenbank - insert Applicant data" + e.getMessage());
 		}
 	}
 
@@ -57,7 +57,7 @@ public class Datenbank {
 			preparedStatement.setString(4, Oberflaeche.steuerung.dateVacancy);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Datenbank - insert VacancyData" + e.getMessage());
 		}
 	}
 
@@ -133,7 +133,7 @@ public class Datenbank {
 					"u474396146_aptra", "aptraDB");
 		}
 			catch (SQLException e) {
-				System.out.println(e.getMessage());
+				System.out.println("Datenbank - deleteApplicant" + e.getMessage());
 			}
 		
 	int [] rows = Oberflaeche.tableApplicant.getSelectedRows(); 	
