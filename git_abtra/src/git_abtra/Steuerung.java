@@ -3,14 +3,18 @@ package git_abtra;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -32,11 +36,11 @@ public class Steuerung {
 	private Font fontHeadline = new Font("Arial", Font.BOLD, 18);
 	private Font fontTextField = new Font("Arial", Font.BOLD, 14);
 
-	private JPanel panelDialog = new JPanel();
-	private JPanel panelDialog2 = new JPanel();
-	private JPanel panelDialog3 = new JPanel();
-	private JPanel panelDialog4 = new JPanel();
-	private JPanel panelDialog5 = new JPanel();
+	private JPanel panelDialogApplicantMain = new JPanel();
+	private JPanel panelDialogApplicantApplication = new JPanel();
+	private JPanel panelDialogVacancyMain = new JPanel();
+	private JPanel panelDialogVacancySpecification = new JPanel();
+	private JPanel panelDialogApplicantContact = new JPanel();
 
 	// Neuer Bewerber
 	private JLabel labelName = new JLabel("Name:");
@@ -44,15 +48,16 @@ public class Steuerung {
 	private JLabel labelStreet = new JLabel("Straße:");
 	private JLabel labelHouseNr = new JLabel("Hausnummer:");
 	private JLabel labelPostalCode = new JLabel("PLZ:");
-	private JLabel labelInstruction = new JLabel("Bitte tragen Sie alle erforderlichen Daten ein!");
+	private JLabel labelInstruction = new JLabel(
+			"Bitte tragen Sie alle erforderlichen Daten ein!");
 	private JLabel labelVacancy = new JLabel("Bewerbung für die Stelle:");
 	private JLabel labelDate = new JLabel("Geburtsdatum:");
-	private JLabel labelEducationalAchievement = new JLabel("Höchster Bildungsabschluss:");
+	private JLabel labelEducationalAchievement = new JLabel(
+			"Höchster Bildungsabschluss:");
 	private JLabel labelCity = new JLabel("Wohnort:");
 	private JLabel labelTelefonHome = new JLabel("Telefon privat:");
 	private JLabel labelTelefonMobil = new JLabel("Telefon mobil");
 	private JLabel labelEmail = new JLabel("E-Mail:");
-	
 
 	private JTextField fieldVacancy = new JTextField();
 	private JTextField fieldDate = new JTextField();
@@ -66,28 +71,26 @@ public class Steuerung {
 	private JTextField fieldTelefonMobil = new JTextField();
 	private JTextField fieldEmail = new JTextField();
 
-	private String[] boxListEducationalAchievement = { "Haupptschulabschluss", "Mittlere Reife", "Abitur", "Studium" };
+	private String[] boxListEducationalAchievement = { "Haupptschulabschluss",
+			"Mittlere Reife", "Abitur", "Studium" };
 	private JComboBox boxEducationalAchievement = new JComboBox(
 			boxListEducationalAchievement);
-	private Integer[] boxListDay = { 1, 2, 3, 4,
-			5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
-			16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
-			27, 28, 29, 30, 31 };
+	private Integer[] boxListDay = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+			14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+			31 };
 	private JComboBox boxDay = new JComboBox(boxListDay);
-	private Integer[] boxListMonth = { 1, 2,
-			3, 4, 5, 6, 7, 8, 9, 
-			10, 11, 12 };
+	private Integer[] boxListMonth = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 	private JComboBox boxMonth = new JComboBox(boxListMonth);
-	private Integer[] boxListYear = {  2000, 1999, 1998,
-			1997, 1996, 1995, 1994, 1993, 1992, 1991, 1990,
-			1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982,
-			1981, 1980, 1979, 1978, 1977, 1976, 1975, 1974,
-			1973, 1972, 1971, 1970 };
+	private Integer[] boxListYear = { 2000, 1999, 1998, 1997, 1996, 1995, 1994,
+			1993, 1992, 1991, 1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983,
+			1982, 1981, 1980, 1979, 1978, 1977, 1976, 1975, 1974, 1973, 1972,
+			1971, 1970 };
 	private JComboBox boxYear = new JComboBox(boxListYear);
 	public static Calendar cal = Calendar.getInstance();
 	private JTabbedPane tabAdd = new JTabbedPane(JTabbedPane.TOP,
 			JTabbedPane.SCROLL_TAB_LAYOUT);
-	
+	private JButton save = new JButton("Speichern");
+
 	// Neue Stelle
 	private JLabel labelArea = new JLabel();
 	private JLabel labelPosition = new JLabel();
@@ -124,17 +127,38 @@ public class Steuerung {
 	public static String level;
 	public static String dateVacancy;
 
+	// Sonstige
+
+	private boolean LaF = true;
 
 	public static void main(String[] args) {
-		// Design des Programms
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-
 		}
-
 		new Oberflaeche("Bewerberverwaltung");
+	}
 
+	// METHODE: Design ändern
+	public void changeDesign() {
+		if (LaF == true) {
+			try {
+				UIManager.setLookAndFeel(UIManager
+						.getCrossPlatformLookAndFeelClassName());
+
+			} catch (Exception e) {
+
+			}
+		} else {
+			try {
+				UIManager.setLookAndFeel(UIManager
+						.getSystemLookAndFeelClassName());
+
+			} catch (Exception e) {
+			}
+		}
+		SwingUtilities.updateComponentTreeUI(Oberflaeche.frame);
+		LaF = !LaF;
 	}
 
 	// METHODE: Standardkonstruktor
@@ -155,14 +179,13 @@ public class Steuerung {
 		telefonHome = fieldTelefonHome.getText();
 		telefonMobil = fieldTelefonMobil.getText();
 		email = fieldEmail.getText();
-	    day = (int) boxDay.getSelectedItem();
+		day = (int) boxDay.getSelectedItem();
 		month = (int) boxMonth.getSelectedItem();
-		year = (int) boxYear.getSelectedItem();		
+		year = (int) boxYear.getSelectedItem();
 		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, (month-1));
+		cal.set(Calendar.MONTH, (month - 1));
 		cal.set(Calendar.DAY_OF_MONTH, day);
-		
-		
+
 		educationalAchievement = String.valueOf(boxEducationalAchievement
 				.getSelectedItem());
 
@@ -239,7 +262,7 @@ public class Steuerung {
 				.setDefaultCloseOperation(dialogNewApplicant.DO_NOTHING_ON_CLOSE);
 		dialogNewApplicant.addWindowListener(new WindowListener() {
 			public void windowClosing(WindowEvent arg0) {
-				Oberflaeche.steuerung.closeDialogAddApplicant();
+				closeDialogAddApplicant();
 			}
 
 			@Override
@@ -283,94 +306,112 @@ public class Steuerung {
 		dialogNewApplicant.setLocationRelativeTo(null);
 		dialogNewApplicant.setResizable(false);
 		dialogNewApplicant.setTitle("Neuer Bewerber");
-		dialogNewApplicant.add(panelDialog);
-		panelDialog.setBackground(Color.LIGHT_GRAY);
-		panelDialog.setLayout(new BoxLayout(panelDialog, BoxLayout.Y_AXIS));
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog.add(labelInstruction);
+		dialogNewApplicant.add(panelDialogApplicantMain);
+		panelDialogApplicantMain.setBackground(Color.LIGHT_GRAY);
+		panelDialogApplicantMain.setLayout(new BoxLayout(panelDialogApplicantMain, BoxLayout.Y_AXIS));
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(labelInstruction);
 		labelInstruction.setFont(fontHeadline);
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog.add(labelName);
-		panelDialog.add(fieldName);
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(labelName);
+		panelDialogApplicantMain.add(fieldName);
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldName.setFont(fontTextField);
-		panelDialog.add(labelFirstName);
-		panelDialog.add(fieldFirstName);
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(labelFirstName);
+		panelDialogApplicantMain.add(fieldFirstName);
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldFirstName.setFont(fontTextField);
-		panelDialog.add(labelStreet);
-		panelDialog.add(fieldStreet);
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(labelStreet);
+		panelDialogApplicantMain.add(fieldStreet);
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldStreet.setFont(fontTextField);
-		panelDialog.add(labelHouseNr);
-		panelDialog.add(fieldHouseNr);
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(labelHouseNr);
+		panelDialogApplicantMain.add(fieldHouseNr);
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldHouseNr.setFont(fontTextField);
-		panelDialog.add(labelPostalCode);
-		panelDialog.add(fieldPostalCode);
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(labelPostalCode);
+		panelDialogApplicantMain.add(fieldPostalCode);
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldPostalCode.setFont(fontTextField);
-		panelDialog.add(labelCity);
-		panelDialog.add(fieldCity);
-		panelDialog.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantMain.add(labelCity);
+		panelDialogApplicantMain.add(fieldCity);
+		panelDialogApplicantMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldCity.setFont(fontTextField);
-		// PanelDialog2 neuer Bewerber_Bewerbung
-		panelDialog2.setBackground(Color.LIGHT_GRAY);
-		panelDialog2.setLayout(new BoxLayout(panelDialog2, BoxLayout.Y_AXIS));
-		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog2.add(labelVacancy);
+		// panelDialogApplicantApplication neuer Bewerber_Bewerbung
+		panelDialogApplicantApplication.setBackground(Color.LIGHT_GRAY);
+		panelDialogApplicantApplication.setLayout(new BoxLayout(panelDialogApplicantApplication, BoxLayout.Y_AXIS));
+		panelDialogApplicantApplication.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantApplication.add(labelVacancy);
 		labelVacancy.setFont(fontTextField);
-		panelDialog2.add(fieldVacancy);
-		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantApplication.add(fieldVacancy);
+		panelDialogApplicantApplication.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldVacancy.setFont(fontTextField);
-		panelDialog2.add(labelDate);	
+		panelDialogApplicantApplication.add(labelDate);
 		labelDate.setFont(fontTextField);
 		boxDay.setToolTipText("Tag");
-		panelDialog2.add(boxDay);
-		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantApplication.add(boxDay);
+		panelDialogApplicantApplication.add(Box.createRigidArea(new Dimension(0, 10)));
 		boxMonth.setToolTipText("Monat");
-		panelDialog2.add(boxMonth);
-		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantApplication.add(boxMonth);
+		panelDialogApplicantApplication.add(Box.createRigidArea(new Dimension(0, 10)));
 		boxYear.setToolTipText("Jahr");
-		panelDialog2.add(boxYear);
-		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog2.add(labelEducationalAchievement);
+		panelDialogApplicantApplication.add(boxYear);
+		panelDialogApplicantApplication.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantApplication.add(labelEducationalAchievement);
 		labelEducationalAchievement.setFont(fontTextField);
 		boxEducationalAchievement.setToolTipText("Höchster Bildungsabschluss:");
-		panelDialog2.add(boxEducationalAchievement);
-		panelDialog2.add(Box.createRigidArea(new Dimension(0, 10)));
-		// PanelDialog2 neuer Bewerber_Kontaktdaten
-		panelDialog5.setBackground(Color.LIGHT_GRAY);
-		panelDialog5.setLayout(new BoxLayout(panelDialog5, BoxLayout.Y_AXIS));
-		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog5.add(labelTelefonHome);
-		panelDialog5.add(fieldTelefonHome);
-		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantApplication.add(boxEducationalAchievement);
+		panelDialogApplicantApplication.add(Box.createRigidArea(new Dimension(0, 10)));
+		// panelDialogApplicantApplication neuer Bewerber_Kontaktdaten
+		panelDialogApplicantContact.setBackground(Color.LIGHT_GRAY);
+		panelDialogApplicantContact.setLayout(new BoxLayout(panelDialogApplicantContact, BoxLayout.Y_AXIS));
+		panelDialogApplicantContact.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantContact.add(labelTelefonHome);
+		panelDialogApplicantContact.add(fieldTelefonHome);
+		panelDialogApplicantContact.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldTelefonHome.setFont(fontTextField);
-		panelDialog5.add(labelTelefonMobil);
-		panelDialog5.add(fieldTelefonMobil);
-		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantContact.add(labelTelefonMobil);
+		panelDialogApplicantContact.add(fieldTelefonMobil);
+		panelDialogApplicantContact.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldTelefonMobil.setFont(fontTextField);
-		panelDialog5.add(labelEmail);
-		panelDialog5.add(fieldEmail);
-		panelDialog5.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogApplicantContact.add(labelEmail);
+		panelDialogApplicantContact.add(fieldEmail);
+		panelDialogApplicantContact.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldEmail.setFont(fontTextField);
-		panelDialog5.add(Oberflaeche.save);
+		panelDialogApplicantContact.add(save);
 
+		save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				
+				controlInputApplicant();
+				try {
+					Oberflaeche.getDatenbank().insertApplicantData();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				closeDialogAddApplicant();
+				Vector resultsApplicant = Oberflaeche.getDatenbank()
+						.insertApplicantDataIntoTable();
+				Oberflaeche.modelPool.setDataVector(resultsApplicant,
+						Oberflaeche.COLUMN_IDENTIFIERS_APPLICANT);
+				Oberflaeche.modelPool.fireTableDataChanged();
+			}
+
+		});
 		// TabbedPane Dialog
 		dialogNewApplicant.add(tabAdd);
-		tabAdd.addTab("Allgemein", panelDialog);
-		tabAdd.addTab("Bewerbung", panelDialog2);
-		tabAdd.addTab("Kontaktdaten", panelDialog5);
+		tabAdd.addTab("Allgemein", panelDialogApplicantMain);
+		tabAdd.addTab("Bewerbung", panelDialogApplicantApplication);
+		tabAdd.addTab("Kontaktdaten", panelDialogApplicantContact);
 		SwingUtilities.updateComponentTreeUI(dialogNewApplicant);
 
 	}
 
 	// METODE: Bewerber Dialog löschen
 	public void closeDialogAddApplicant() {
-		panelDialog.removeAll();
-		panelDialog2.removeAll();
-		panelDialog5.removeAll();
+		panelDialogApplicantMain.removeAll();
+		panelDialogApplicantApplication.removeAll();
+		panelDialogApplicantContact.removeAll();
 		fieldVacancy.setText("");
 		fieldDate.setText("");
 		fieldName.setText("");
@@ -398,39 +439,39 @@ public class Steuerung {
 
 	// METHODE: Neue Stelle anlegen
 	public void dialogAddVacancy() {
-		// PanelDialog3 neue freie Stelle
+		// panelDialogVacancyMain neue freie Stelle
 		dialogNewVacancy.setVisible(true);
 		dialogNewVacancy.setSize(450, 400);
 		dialogNewVacancy.setLocationRelativeTo(null);
 		dialogNewVacancy.setResizable(false);
 		dialogNewVacancy.setTitle("Neuer Stelle");
-		panelDialog3.setBackground(Color.LIGHT_GRAY);
-		panelDialog3.setLayout(new BoxLayout(panelDialog3, BoxLayout.Y_AXIS));
-		panelDialog3.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog3.add(labelInstruction2);
+		panelDialogVacancyMain.setBackground(Color.LIGHT_GRAY);
+		panelDialogVacancyMain.setLayout(new BoxLayout(panelDialogVacancyMain, BoxLayout.Y_AXIS));
+		panelDialogVacancyMain.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancyMain.add(labelInstruction2);
 		labelInstruction2
 				.setText("Bitte tragen Sie alle erfoderlichen Daten ein!");
 		labelInstruction2.setFont(fontHeadline);
-		panelDialog3.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog3.add(labelPosition);
+		panelDialogVacancyMain.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancyMain.add(labelPosition);
 		labelPosition.setText("Position:");
-		panelDialog3.add(fieldPosition);
-		panelDialog3.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancyMain.add(fieldPosition);
+		panelDialogVacancyMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldPosition.setFont(fontTextField);
-		panelDialog3.add(labelArea);
+		panelDialogVacancyMain.add(labelArea);
 		labelArea.setText("Arbeitsbereich:");
-		panelDialog3.add(fieldArea);
-		panelDialog3.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancyMain.add(fieldArea);
+		panelDialogVacancyMain.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldArea.setFont(fontTextField);
 
-		// PanelDialog4 neue freie Stelle
-		panelDialog4.setBackground(Color.LIGHT_GRAY);
-		panelDialog4.setLayout(new BoxLayout(panelDialog4, BoxLayout.Y_AXIS));
-		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog4.add(labelLevel);
+		// panelDialogVacancySpecification neue freie Stelle
+		panelDialogVacancySpecification.setBackground(Color.LIGHT_GRAY);
+		panelDialogVacancySpecification.setLayout(new BoxLayout(panelDialogVacancySpecification, BoxLayout.Y_AXIS));
+		panelDialogVacancySpecification.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancySpecification.add(labelLevel);
 		labelLevel.setText("Art des Bewerbers:");
-		panelDialog4.add(fieldLevel);
-		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancySpecification.add(fieldLevel);
+		panelDialogVacancySpecification.add(Box.createRigidArea(new Dimension(0, 10)));
 		fieldLevel.setFont(fontTextField);
 		String[] boxListDay = { "Bitte auswählen", "01", "02", "03", "04",
 				"05", "06", "07", "08", "09", "10", "11", "12", "13", "14",
@@ -438,15 +479,15 @@ public class Steuerung {
 				"25", "26", "27", "28", "29", "30", "31" };
 		JComboBox boxDay = new JComboBox(boxListDay);
 		boxDay.setToolTipText("Tag");
-		panelDialog4.add(boxDay);
-		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancySpecification.add(boxDay);
+		panelDialogVacancySpecification.add(Box.createRigidArea(new Dimension(0, 10)));
 		JComboBox boxMonth = new JComboBox(boxListMonth);
 		String[] boxListMonth = { "Bitte auswählen", "Januar", "Februar",
 				"März", "April", "Mai", "Juni", "Juli", "August", "September",
 				"Oktober", "November", "Dezember" };
 		boxMonth.setToolTipText("Monat");
-		panelDialog4.add(boxMonth);
-		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancySpecification.add(boxMonth);
+		panelDialogVacancySpecification.add(Box.createRigidArea(new Dimension(0, 10)));
 		String[] boxListYear = { "Bitte auswählen", "2000", "1999", "1998",
 				"1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990",
 				"1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982",
@@ -454,22 +495,22 @@ public class Steuerung {
 				"1973", "1972", "1971", "1970" };
 		JComboBox boxYear = new JComboBox(boxListYear);
 		boxYear.setToolTipText("Jahr");
-		panelDialog4.add(boxYear);
-		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancySpecification.add(boxYear);
+		panelDialogVacancySpecification.add(Box.createRigidArea(new Dimension(0, 10)));
 		String[] boxListEducationalAchievement = { "Bitte auswählen",
 				"Haupptschulabschluss", "Mittlere Reife", "Abitur", "Studium" };
 		JComboBox boxEducationalAchievement = new JComboBox(
 				boxListEducationalAchievement);
-		panelDialog4.add(labelEducationalAchievement);
+		panelDialogVacancySpecification.add(labelEducationalAchievement);
 		boxEducationalAchievement.setToolTipText("Höchster Bildugsabschluss:");
-		panelDialog4.add(boxEducationalAchievement);
-		panelDialog4.add(Box.createRigidArea(new Dimension(0, 10)));
-		panelDialog4.add(Oberflaeche.save);
+		panelDialogVacancySpecification.add(boxEducationalAchievement);
+		panelDialogVacancySpecification.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelDialogVacancySpecification.add(save);
 
 		// TabbedPane Dialog
 		dialogNewVacancy.add(tabVacancy);
-		tabVacancy.addTab("Allgemein", panelDialog3);
-		tabVacancy.addTab("Spezifikation", panelDialog4);
+		tabVacancy.addTab("Allgemein", panelDialogVacancyMain);
+		tabVacancy.addTab("Spezifikation", panelDialogVacancySpecification);
 		SwingUtilities.updateComponentTreeUI(dialogNewVacancy);
 
 	}

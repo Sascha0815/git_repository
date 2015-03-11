@@ -58,7 +58,7 @@ public class Oberflaeche extends JFrame {
 	private JButton buttonRefreshApplicant = new JButton();
 	private JButton buttonRefreshJob = new JButton();
 
-	private DefaultTableModel modelPool = new DefaultTableModel(1, 4) {
+	public static DefaultTableModel modelPool = new DefaultTableModel(1, 4) {
 		public boolean isCellEditable(int row, int column) {
 			return false;
 		}
@@ -74,15 +74,21 @@ public class Oberflaeche extends JFrame {
 
 	private JLabel labelApplicantPic = new JLabel();
 	private JLabel labelBackground = new JLabel();
-	public static JButton save = new JButton("Speichern");
+	
 
 	
 
 	// Objekte
 
-	final Datenbank datenbank = new Datenbank();
-	final public static Steuerung steuerung = new Steuerung();
+	final private static Datenbank datenbank = new Datenbank();
+	final private static Steuerung steuerung = new Steuerung();
 
+	public static Datenbank getDatenbank(){
+		return datenbank;
+	}
+	public static Steuerung getSteuerung(){
+		return steuerung;
+	}
 	public final static Vector COLUMN_IDENTIFIERS_APPLICANT = new Vector() {
 		{ 
 			add("Bewerbernummer");
@@ -350,6 +356,11 @@ public class Oberflaeche extends JFrame {
 				steuerung.dialogAddApplicant();
 			}
 		});
+		itemChangeDesign.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				steuerung.changeDesign();
+			}
+		});
 
 		// SWING: TabbedPane
 		frame.add(tabBar);
@@ -386,22 +397,6 @@ public class Oberflaeche extends JFrame {
 		scrollPaneJob
 				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-		save.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				steuerung.controlInputApplicant();
-				try {
-					datenbank.insertApplicantData();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				steuerung.closeDialogAddApplicant();
-				Vector resultsApplicant = datenbank
-						.insertApplicantDataIntoTable();
-				modelPool.setDataVector(resultsApplicant,
-						COLUMN_IDENTIFIERS_APPLICANT);
-				modelPool.fireTableDataChanged();
-			}
-
-		});
+	
 	}
 }

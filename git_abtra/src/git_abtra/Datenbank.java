@@ -19,19 +19,19 @@ public class Datenbank {
 					"jdbc:mysql://185.28.20.242:3306/u474396146_db",
 					"u474396146_aptra", "aptraDB");
 			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
-			preparedStatement.setString(1, Oberflaeche.steuerung.name);
-			preparedStatement.setString(2, Oberflaeche.steuerung.firstName);
-			preparedStatement.setString(3, Oberflaeche.steuerung.street);
-			preparedStatement.setInt(4, Oberflaeche.steuerung.houseNr);
-			preparedStatement.setInt(5, Oberflaeche.steuerung.postalCode);
-			preparedStatement.setString(6, Oberflaeche.steuerung.city);
-			preparedStatement.setString(7, Oberflaeche.steuerung.telefonHome);
-			preparedStatement.setString(8, Oberflaeche.steuerung.telefonMobil);
-			preparedStatement.setString(9, Oberflaeche.steuerung.email);
-			preparedStatement.setString(10, Oberflaeche.steuerung.vacancy);
-			preparedStatement.setDate(11, new java.sql.Date(Oberflaeche.steuerung.cal.getTimeInMillis()));
+			preparedStatement.setString(1, Oberflaeche.getSteuerung().name);
+			preparedStatement.setString(2, Oberflaeche.getSteuerung().firstName);
+			preparedStatement.setString(3, Oberflaeche.getSteuerung().street);
+			preparedStatement.setInt(4, Oberflaeche.getSteuerung().houseNr);
+			preparedStatement.setInt(5, Oberflaeche.getSteuerung().postalCode);
+			preparedStatement.setString(6, Oberflaeche.getSteuerung().city);
+			preparedStatement.setString(7, Oberflaeche.getSteuerung().telefonHome);
+			preparedStatement.setString(8, Oberflaeche.getSteuerung().telefonMobil);
+			preparedStatement.setString(9, Oberflaeche.getSteuerung().email);
+			preparedStatement.setString(10, Oberflaeche.getSteuerung().vacancy);
+			preparedStatement.setDate(11, new java.sql.Date(Oberflaeche.getSteuerung().cal.getTimeInMillis()));
 			preparedStatement.setString(12,
-					Oberflaeche.steuerung.educationalAchievement);
+					Oberflaeche.getSteuerung().educationalAchievement);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("insert problems - Datenbank - insert Applicant data" + e.getMessage());
@@ -51,10 +51,10 @@ public class Datenbank {
 					"jdbc:mysql://185.28.20.242:3306/u474396146_db",
 					"u474396146_aptra", "aptraDB");
 			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
-			preparedStatement.setString(1, Oberflaeche.steuerung.area);
-			preparedStatement.setString(2, Oberflaeche.steuerung.position);
-			preparedStatement.setString(3, Oberflaeche.steuerung.level);
-			preparedStatement.setString(4, Oberflaeche.steuerung.dateVacancy);
+			preparedStatement.setString(1, Oberflaeche.getSteuerung().area);
+			preparedStatement.setString(2, Oberflaeche.getSteuerung().position);
+			preparedStatement.setString(3, Oberflaeche.getSteuerung().level);
+			preparedStatement.setString(4, Oberflaeche.getSteuerung().dateVacancy);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Datenbank - insert VacancyData" + e.getMessage());
