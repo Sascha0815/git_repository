@@ -86,7 +86,7 @@ public class Steuerung {
 			1982, 1981, 1980, 1979, 1978, 1977, 1976, 1975, 1974, 1973, 1972,
 			1971, 1970 };
 	private JComboBox boxYear = new JComboBox(boxListYear);
-	public static Calendar cal = Calendar.getInstance();
+	private static Calendar cal = Calendar.getInstance();
 	private JTabbedPane tabAdd = new JTabbedPane(JTabbedPane.TOP,
 			JTabbedPane.SCROLL_TAB_LAYOUT);
 	private JButton save = new JButton("Speichern");
@@ -106,31 +106,30 @@ public class Steuerung {
 
 	// Datentypen
 
-	public static String name;
-	public static String firstName;
-	public static String street;
-	public static int houseNr;
-	public static int postalCode;
-	public static String city;
-	public static String vacancy;
-	public static String telefonHome;
-	public static String telefonMobil;
-	public static String email;
-	public static java.sql.Date dateOfApplication;
-	public static String educationalAchievement;
-	public static int day;
-	public static int month;
-	public static int year;
+	private String name;
+	private String firstName;
+	private String street;
+	private int houseNr;
+	private int postalCode;
+	private String city;
+	private String vacancy;
+	private String telefonHome;
+	private String telefonMobil;
+	private String email;
+	private java.sql.Date dateOfApplication;
+	private String educationalAchievement;
+	private int day;
+	private int month;
+	private int year;
 
-	public static String area;
-	public static String position;
-	public static String level;
-	public static String dateVacancy;
+	private String area;
+	private String position;
+	private String level;
+	private String dateVacancy;
 
 	// Sonstige
 
 	private boolean LaF = true;
-
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -139,33 +138,83 @@ public class Steuerung {
 		new Oberflaeche("Bewerberverwaltung");
 	}
 
-	// METHODE: Design ändern
-	public void changeDesign() {
-		if (LaF == true) {
-			try {
-				UIManager.setLookAndFeel(UIManager
-						.getCrossPlatformLookAndFeelClassName());
-
-			} catch (Exception e) {
-
-			}
-		} else {
-			try {
-				UIManager.setLookAndFeel(UIManager
-						.getSystemLookAndFeelClassName());
-
-			} catch (Exception e) {
-			}
-		}
-		SwingUtilities.updateComponentTreeUI(Oberflaeche.frame);
-		LaF = !LaF;
+	public  String getName(){
+		return name;
+	}	
+	public  String getFirstName(){
+		return firstName;
 	}
-
+	public  String getStreet(){
+		return street;
+	}
+	public  int getHouseNr(){
+		return houseNr;
+	}
+	public  int getPostalCode(){
+		return postalCode;
+	}
+	public  String getCity(){
+		return city;
+	}
+	public  String getVacancy(){
+		return vacancy;
+	}
+	public  String getTelefonHome(){
+		return telefonHome;
+	}
+	public  String getTelefonMobil(){
+		return telefonMobil;
+	}
+	public  String getEmail(){
+		return email;
+	}
+	public  Calendar getCal(){
+		return cal;
+	}
+	public  String getEducationalAchievement(){
+		return educationalAchievement;
+	}
+	public  String getArea(){
+		return area;
+	}
+	public  String getPosition(){
+		return position;
+	}
+	public  String getLevel(){
+		return level;
+	}
+	public  String getDateVacancy(){
+		return dateVacancy;
+	}
+	
+	
 	// METHODE: Standardkonstruktor
 	public Steuerung() {
 
 	}
+	
+	// METHODE: Design ändern
+		public void changeDesign() {
+			if (LaF == true) {
+				try {
+					UIManager.setLookAndFeel(UIManager
+							.getCrossPlatformLookAndFeelClassName());
 
+				} catch (Exception e) {
+
+				}
+			} else {
+				try {
+					UIManager.setLookAndFeel(UIManager
+							.getSystemLookAndFeelClassName());
+
+				} catch (Exception e) {
+				}
+			}
+			SwingUtilities.updateComponentTreeUI(Oberflaeche.frame);
+			LaF = !LaF;
+		}
+		
 	// METHODE: Bewerbereingabe überprüfen
 	public boolean controlInputApplicant() {
 
