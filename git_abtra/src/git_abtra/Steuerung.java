@@ -136,6 +136,11 @@ public class Steuerung {
 		} catch (Exception e) {
 		}
 		new Oberflaeche("Bewerberverwaltung");
+		Vector resultsApplicant = Oberflaeche.getDatenbank()
+				.insertApplicantDataIntoTable();
+		Oberflaeche.modelPool.setDataVector(resultsApplicant,
+				Oberflaeche.COLUMN_IDENTIFIERS_APPLICANT);
+		Oberflaeche.modelPool.fireTableDataChanged();
 	}
 
 	public  String getName(){

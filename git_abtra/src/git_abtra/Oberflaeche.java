@@ -102,7 +102,7 @@ public class Oberflaeche extends JFrame {
 			add("Telefon mobil");
 			add("E-Mail");
 			add("Arbeitsstelle");
-			add("Datum (J-M-T");
+			add("Datum (J-M-T)");
 			add("Bildungsabschluss");
 
 		}
